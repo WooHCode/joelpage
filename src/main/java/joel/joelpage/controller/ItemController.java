@@ -32,7 +32,7 @@ public class ItemController {
         Item item = new Item();
         item.toEntity(dto.getName(),dto.getPrice(),dto.getImgPath(),dto.getItemDesc());
         itemService.saveItem(item);
-        return "itemList";
+        return "redirect:/home";
     }
 
 
