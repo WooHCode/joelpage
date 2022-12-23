@@ -1,0 +1,21 @@
+admin page: 상품등록, 직원 출근관리, 매출관리, 네이버 지도 리뷰로 링크걸어서 리뷰관리
+개인 아이디어 정리 페이지, 회원관리(회원가입, 로그인(jwt,cookie)), 메뉴 등록 하면 api로 front로 넘겨주기, 일정관리
+
+client page: 메뉴 보여주고, 로그인(jwt, oauth), 가게설명, 인스타 링크, 
+
+템플릿 사용- bootstrap
+
+서버: 카페 24 or cloudtype
+
+db postgre, h2db
+
+java17, springboot3.0, jpa, vue3, html5, css3, 
+
+
+project root: service, dto, controller, service, entity, repository
+
+entity : member, item, board, employee,
+
+item: id, item_name, price, description, img_path
+
+member -> item foreign key 
