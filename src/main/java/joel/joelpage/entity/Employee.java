@@ -2,15 +2,14 @@ package joel.joelpage.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Employee {
     @Id
@@ -22,7 +21,10 @@ public class Employee {
     private String empName;
 
     @Column(name = "work_date")
-    private LocalDateTime workDate;
+    private LocalDate workDate;
+
+    @Column(name = "is_worked")
+    private boolean isWorked;
 
     @Column(name = "emp_work_count")
     private int empWorkCount;
@@ -35,17 +37,18 @@ public class Employee {
     @Column(name = "emp_description")
     private String empDescription;
 
-    public Employee(Long id, String empName, LocalDateTime workDate, int empWorkCount, int empPay, String empAge, String empDescription) {
+    public Employee(Long id, String empName, LocalDate workDate, boolean isWorked ,int empWorkCount, int empPay, String empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
         this.workDate = workDate;
+        this.isWorked = isWorked;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
         this.empAge = empAge;
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName, LocalDateTime workDate, int empWorkCount, int empPay, String empAge, String empDescription) {
+    public void toEntity(String empName, LocalDate workDate, int empWorkCount, int empPay, String empAge, String empDescription) {
         this.empName = empName;
         this.workDate = workDate;
         this.empWorkCount = empWorkCount;

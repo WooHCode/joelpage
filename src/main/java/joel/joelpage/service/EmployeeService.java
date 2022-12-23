@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,6 +36,14 @@ public class EmployeeService {
     public void updateEmp(Long empId, UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(empId).get();
         employee.toEntity(dto.getEmpName(), dto.getWorkDate(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
+
+    }
+
+    public void changeEmpWorkCount(Long empId, LocalDateTime workDate, int workCount) {
+        Employee employee = employeeRepository.findById(empId).get();
+    }
+
+    static void isAdded() {
 
     }
 
