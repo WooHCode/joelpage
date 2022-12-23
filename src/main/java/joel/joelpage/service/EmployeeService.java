@@ -1,5 +1,6 @@
 package joel.joelpage.service;
 
+import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,11 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void updateEmp() {
+    public void updateEmp(Long empId, UpdateEmployeeDto dto) {
+        Employee employee = employeeRepository.findById(empId).get();
+        employee.toEntity(dto.getEmpName(), dto.getWorkDate(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
 
     }
+
 
 }

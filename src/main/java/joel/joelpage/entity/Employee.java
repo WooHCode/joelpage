@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "emp_id", nullable = false)
     private Long id;
 
     @Column(name = "emp_name")
@@ -37,6 +37,15 @@ public class Employee {
 
     public Employee(Long id, String empName, LocalDateTime workDate, int empWorkCount, int empPay, String empAge, String empDescription) {
         this.id = id;
+        this.empName = empName;
+        this.workDate = workDate;
+        this.empWorkCount = empWorkCount;
+        this.empPay = empPay;
+        this.empAge = empAge;
+        this.empDescription = empDescription;
+    }
+
+    public void toEntity(String empName, LocalDateTime workDate, int empWorkCount, int empPay, String empAge, String empDescription) {
         this.empName = empName;
         this.workDate = workDate;
         this.empWorkCount = empWorkCount;
