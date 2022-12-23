@@ -18,4 +18,6 @@ entity : member, item, board, employee,
 
 item: id, item_name, price, description, img_path
 
+employee : id, emp_name, empName, workDate, empWorkCount,  empPay,  empAge, empDescription
+
 member -> item foreign key 
