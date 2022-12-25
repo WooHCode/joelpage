@@ -20,4 +20,6 @@ item: id, item_name, price, description, img_path
 
 employee : id, emp_name, empName, workDate, empWorkCount,  empPay,  empAge, empDescription
 
+member : id, member_name, age, email
+
 member -> item foreign key 
