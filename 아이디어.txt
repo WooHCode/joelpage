@@ -11,6 +11,7 @@ db postgre, h2db
 
 java17, springboot3.0, jpa, vue3, html5, css3, 
 
+oauth2 : naver, google
 
 project root: service, dto, controller, service, entity, repository
 
