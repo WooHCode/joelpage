@@ -17,7 +17,7 @@ project root: service, dto, controller, service, entity, repository
 
 entity : member, item, board, employee,
 
-item: id, item_name, price, description, img_path
+item: id, item_name, price, description, img_path, item_code
 
 employee : id, emp_name, empName, workDate, empWorkCount,  empPay,  empAge, empDescription
 
