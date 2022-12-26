@@ -1,5 +1,6 @@
 package joel.joelpage.dto;
 
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import joel.joelpage.entity.ItemCode;
@@ -17,5 +18,6 @@ public class ItemDto {
 
     private String imgPath;
     private String itemDesc;
+    @Enumerated
     private ItemCode itemCode;
 }
