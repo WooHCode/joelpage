@@ -1,6 +1,7 @@
 package joel.joelpage.service;
 
 import joel.joelpage.entity.Item;
+import joel.joelpage.entity.ItemCode;
 import joel.joelpage.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,8 +53,8 @@ public class ItemService {
      *  상품을 id로 가져와 데이터 수정, 더티체킹으로 업데이트
      */
     @Transactional
-    public void updateItem(Long itemId, String itemName, int price,String imgPath,String itemDes) {
+    public void updateItem(Long itemId, String itemName, int price, String imgPath, String itemDes , ItemCode itemCode) {
         Item item = itemRepository.findById(itemId).get();
-        item.toEntity(itemName,price,imgPath,itemDes);
+        item.toEntity(itemName,price,imgPath,itemDes,itemCode);
     }
 }

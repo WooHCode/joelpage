@@ -25,18 +25,23 @@ public class Item {
     @Column(name = "item_description")
     private String itemDes;
 
-    public Item(Long id, String name, int price,String imgPath ,String itemDes) {
+    @Enumerated(EnumType.STRING)
+    private ItemCode itemCode;
+
+    public Item(Long id, String name, int price, String imgPath, String itemDes, ItemCode itemCode) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.imgPath = imgPath;
         this.itemDes = itemDes;
+        this.itemCode = itemCode;
     }
 
-    public void toEntity(String name, int price,String imgPath ,String itemDes) {
+    public void toEntity(String name, int price, String imgPath , String itemDes, ItemCode itemCode) {
         this.name = name;
         this.price = price;
         this.itemDes = itemDes;
         this.imgPath = imgPath;
+        this.itemCode = itemCode;
     }
 }

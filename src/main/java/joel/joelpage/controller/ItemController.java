@@ -30,7 +30,7 @@ public class ItemController {
             return "items/createItemForm";
         }
         Item item = new Item();
-        item.toEntity(dto.getName(),dto.getPrice(),dto.getImgPath(),dto.getItemDesc());
+        item.toEntity(dto.getName(),dto.getPrice(),dto.getImgPath(),dto.getItemDesc(), dto.getItemCode());
         itemService.saveItem(item);
         return "redirect:/home";
     }

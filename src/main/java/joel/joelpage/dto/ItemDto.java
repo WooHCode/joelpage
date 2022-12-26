@@ -2,6 +2,7 @@ package joel.joelpage.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
+import joel.joelpage.entity.ItemCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +17,5 @@ public class ItemDto {
 
     private String imgPath;
     private String itemDesc;
+    private ItemCode itemCode;
 }
