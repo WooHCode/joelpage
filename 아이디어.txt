@@ -11,13 +11,16 @@ db postgre, h2db
 
 java17, springboot3.0, jpa, vue3, html5, css3, 
 
+oauth2 : naver, google
 
 project root: service, dto, controller, service, entity, repository
 
 entity : member, item, board, employee,
 
-item: id, item_name, price, description, img_path
+item: id, item_name, price, description, img_path, item_code
 
 employee : id, emp_name, empName, workDate, empWorkCount,  empPay,  empAge, empDescription
+
+member : id, member_name, age, email
 
 member -> item foreign key 
