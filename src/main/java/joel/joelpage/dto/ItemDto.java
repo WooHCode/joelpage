@@ -4,6 +4,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import joel.joelpage.entity.ItemCode;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,4 +22,6 @@ public class ItemDto {
     private String itemDesc;
     @Enumerated
     private ItemCode itemCode;
+
+
 }
