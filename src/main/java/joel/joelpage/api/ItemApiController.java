@@ -2,6 +2,7 @@ package joel.joelpage.api;
 
 import joel.joelpage.dto.ItemDto;
 import joel.joelpage.entity.Item;
+import joel.joelpage.entity.ItemCode;
 import joel.joelpage.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class ItemApiController {
     public Result findAllItems2() {
         List<Item> allItems = itemService.findAllItems();
         List<ItemDto> collect = allItems.stream()
-                .map(i -> new ItemDto(i.getName()))
+                .map(i -> new ItemDto(i.getId(),i.getName(),i.getPrice(),i.getImgPath(),i.getItemDes(),i.getItemCode()))
                 .collect(Collectors.toList());
         return new Result(collect);
     }
@@ -41,6 +42,12 @@ public class ItemApiController {
     @Data
     @AllArgsConstructor
     static class ItemDto{
+        private Long id;
         private String name;
+        private int price;
+        private String image;
+        private String description;
+        private ItemCode itemCode;
+
     }
 }
