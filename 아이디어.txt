@@ -1,5 +1,5 @@
 admin page: 상품등록, 직원 출근관리, 직원 신상관리(양식), 매출관리, 네이버 지도 리뷰로 링크걸어서 리뷰관리
-개인 아이디어 정리 페이지, 회원관리(회원가입, 로그인(jwt,cookie)), 메뉴 등록 하면 api로 front로 넘겨주기, 일정관리
+개인 아이디어 정리 페이지, 회원관리(회원가입, 로그인(jwt,cookie)), 메뉴 등록 하면 api로 front로 넘겨주기,배민관리 ,일정관리
 이미지 호스팅 - amazon s3
 메인페이지에 매출 그래프 표시(chart.js), 필요 데이터(일별 매출)
 
@@ -17,7 +17,7 @@ java17, springboot3.0, jpa, vue3, html5, css3,
 
 oauth2 : naver, google
 
-project root: service, dto, controller, service, entity, repository
+project root: service, dto, controller, entity, repository
 
 entity : member, item, board, employee,
 
