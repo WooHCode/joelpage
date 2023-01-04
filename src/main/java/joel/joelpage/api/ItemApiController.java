@@ -7,8 +7,7 @@ import joel.joelpage.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +31,12 @@ public class ItemApiController {
         return new Result(collect);
     }
 
+    @PostMapping("/api/v1/items")
+    public CreateItemResponse saveItemV1(@RequestBody Item item) {
+        Long id = itemService.saveItem(item);
+        return new CreateItemResponse(id);
+    }
+
 
     @Data
     @AllArgsConstructor
@@ -49,5 +54,13 @@ public class ItemApiController {
         private String description;
         private ItemCode itemCode;
 
+    }
+
+    @Data
+    static class CreateItemResponse {
+        private Long id;
+        public CreateItemResponse(Long id) {
+            this.id = id;
+        }
     }
 }
