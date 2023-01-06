@@ -36,6 +36,10 @@ public class ItemApiController {
         Long id = itemService.saveItem(item);
         return new CreateItemResponse(id);
     }
+    @DeleteMapping("/api/v1/items/{itemId}")
+    public void removeItem(@PathVariable("itemId") Long itemId) {
+        itemService.deleteItem(itemId);
+    }
 
 
     @Data

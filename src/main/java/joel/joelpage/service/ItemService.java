@@ -57,4 +57,10 @@ public class ItemService {
         Item item = itemRepository.findById(itemId).get();
         item.toEntity(itemName,price,imgPath,itemDes,itemCode);
     }
+
+    @Transactional
+    public void deleteItem(Long itemId) {
+        Item item = itemRepository.findById(itemId).get();
+        itemRepository.delete(item);
+    }
 }
