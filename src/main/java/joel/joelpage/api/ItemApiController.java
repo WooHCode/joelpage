@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class ItemApiController {
     private final ItemService itemService;
 
+    //엔티티 스펙을 노출한 전체 상품조회
     @GetMapping("/api/v1/items")
     public List<Item> findAllItems() {
         return itemService.findAllItems();
