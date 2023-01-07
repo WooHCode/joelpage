@@ -33,6 +33,7 @@ public class ItemApiController {
         return new Result(collect);
     }
 
+    //상품저장
     @PostMapping("/api/v1/items")
     public CreateItemResponse saveItemV1(@RequestBody Item item) {
         Long id = itemService.saveItem(item);
