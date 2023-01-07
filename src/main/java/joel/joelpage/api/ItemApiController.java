@@ -39,6 +39,8 @@ public class ItemApiController {
         Long id = itemService.saveItem(item);
         return new CreateItemResponse(id);
     }
+
+    //id를 파라미터로 상품 1건 삭제
     @DeleteMapping("/api/v1/items/{itemId}")
     public void removeItem(@PathVariable("itemId") Long itemId) {
         itemService.deleteItem(itemId);
