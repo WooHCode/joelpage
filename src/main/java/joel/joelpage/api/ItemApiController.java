@@ -23,6 +23,7 @@ public class ItemApiController {
         return itemService.findAllItems();
     }
 
+    //엔티티 스펙을 노출하지않고 내부클래스를 참조하여 전체상품조회
     @GetMapping("/api/v2/items")
     public Result findAllItems2() {
         List<Item> allItems = itemService.findAllItems();
