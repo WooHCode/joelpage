@@ -53,6 +53,7 @@ public class ItemApiController {
         private T data;
     }
 
+    // 필요한 데이터만 리턴 가능
     @Data
     @AllArgsConstructor
     static class ItemDto{
