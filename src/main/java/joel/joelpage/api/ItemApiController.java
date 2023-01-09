@@ -17,11 +17,13 @@ import java.util.stream.Collectors;
 public class ItemApiController {
     private final ItemService itemService;
 
+    //엔티티 스펙을 노출한 전체 상품조회
     @GetMapping("/api/v1/items")
     public List<Item> findAllItems() {
         return itemService.findAllItems();
     }
 
+    //엔티티 스펙을 노출하지않고 내부클래스를 참조하여 전체상품조회
     @GetMapping("/api/v2/items")
     public Result findAllItems2() {
         List<Item> allItems = itemService.findAllItems();
@@ -31,11 +33,14 @@ public class ItemApiController {
         return new Result(collect);
     }
 
+    //상품저장
     @PostMapping("/api/v1/items")
     public CreateItemResponse saveItemV1(@RequestBody Item item) {
         Long id = itemService.saveItem(item);
         return new CreateItemResponse(id);
     }
+
+    //id를 파라미터로 상품 1건 삭제
     @DeleteMapping("/api/v1/items/{itemId}")
     public void removeItem(@PathVariable("itemId") Long itemId) {
         itemService.deleteItem(itemId);
@@ -48,6 +53,7 @@ public class ItemApiController {
         private T data;
     }
 
+    // 필요한 데이터만 리턴 가능
     @Data
     @AllArgsConstructor
     static class ItemDto{
