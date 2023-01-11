@@ -24,7 +24,7 @@
                 <td th:text="${item.itemDes}"></td>
                 <td th:text="${item.itemCode}"></td>
                 <td>
-                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"
+                    <a href="#" th:href="@{/items/edit/{id} (id=${item.id})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
             </tr>

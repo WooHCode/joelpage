@@ -6,10 +6,11 @@
 </head>
 <body>
 <div class="container">
-    <form th:action="@{/items/{id}/edit}" th:object="${form}" method="post">
+    <form action="/items/edit/${item.id}" th:object="${form}" method="post">
+        <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
             <label th:for="name">상품명</label>
-            <input type="text" th:field="*{name}" class="form-control"
+            <input type="text" th:field="*{itemName}" class="form-control"
                    placeholder="이름을 입력하세요">
         </div>
         <div class="form-group">
@@ -33,8 +34,8 @@
         </div>
 
         <div class="form-group">
-            <label th:for="itemDesc">상품설명</label>
-            <input type="text" style="width:300px;height:200px;font-size:22px;" th:field="*{itemDesc}" class="form-control"
+            <label th:for="itemDes">상품설명</label>
+            <input type="text" style="width:300px;height:200px;font-size:22px;" th:field="*{itemDes}" class="form-control"
                    placeholder="상품설명을 입력하세요">
         </div> <br>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -19,7 +19,7 @@ public class ItemDto {
     private int price;
 
     private String imgPath;
-    private String itemDesc;
+    private String itemDes;
     @Enumerated
     private ItemCode itemCode;
 

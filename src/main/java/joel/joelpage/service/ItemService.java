@@ -30,6 +30,20 @@ public class ItemService {
         return itemRepository.findById(itemId).get();
     }
 
+    @Transactional
+    public UpdateItemDto getUpdateItemDto(Long id) {
+        Item item = itemRepository.findById(id).get();
+        UpdateItemDto dto = UpdateItemDto.builder()
+                .id(item.getId())
+                .itemName(item.getName())
+                .price(item.getPrice())
+                .imgPath(item.getImgPath())
+                .itemDes(item.getItemDes())
+                .itemCode(item.getItemCode())
+                .build();
+        return dto;
+    }
+
     /**
      * 상품 한건 저장, 이미 있는 상품인지 중복검사
      */
@@ -38,6 +52,11 @@ public class ItemService {
         validateSavedItem(item);
         itemRepository.save(item);
         return item.getId();
+    }
+
+    @Transactional
+    public Long saveItemByDto(UpdateItemDto dto) {
+        return itemRepository.save(dto.toEntity()).getId();
     }
 
     /**
@@ -54,11 +73,12 @@ public class ItemService {
      *  상품을 id로 가져와 데이터 수정, 더티체킹으로 업데이트
      */
     @Transactional
-    public void updateItem(Long itemId, UpdateItemDto updateItemDto) {
+    public Long updateItem(Long itemId, UpdateItemDto updateItemDto) {
         Item item = itemRepository.findById(itemId).get();
         item.toEntity(
                 updateItemDto.getItemName(), updateItemDto.getPrice(),
                 updateItemDto.getImgPath(), updateItemDto.getItemDes(),updateItemDto.getItemCode());
+        return item.getId();
     }
 
     @Transactional

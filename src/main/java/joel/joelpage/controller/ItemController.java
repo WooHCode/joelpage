@@ -20,10 +20,28 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
 
+    @GetMapping("/")
+    public String index() {
+        return "/home";
+    }
+
     @GetMapping("/items/new")
     public String createItemForm(Model model) {
         model.addAttribute("form", new ItemDto());
         return "items/createItemForm";
+    }
+    @GetMapping("/items")
+    public String list(Model model) {
+        List<Item> items = itemService.findAllItems();
+        model.addAttribute("items", items);
+        return "items/itemList";
+    }
+
+    @GetMapping("/items/edit/{id}")
+    public String updateItemForm(@PathVariable Long id, Model model) {
+        UpdateItemDto updateItemDto = itemService.getUpdateItemDto(id);
+        model.addAttribute("form", updateItemDto);
+        return "items/updateItemForm";
     }
 
     @PostMapping("/items/new")
@@ -32,22 +50,14 @@ public class ItemController {
             return "items/createItemForm";
         }
         Item item = new Item();
-        item.toEntity(dto.getName(),dto.getPrice(),dto.getImgPath(),dto.getItemDesc(), dto.getItemCode());
+        item.toEntity(dto.getName(),dto.getPrice(),dto.getImgPath(),dto.getItemDes(), dto.getItemCode());
         itemService.saveItem(item);
         return "redirect:/home";
     }
 
-    @PutMapping("/items/{id}/edit")
-    public String updateItem(@PathVariable Long id, @RequestBody UpdateItemDto dto) {
+    @PutMapping("/items/edit/{id}")
+    public String updateItem(@PathVariable("id") Long id, @RequestBody UpdateItemDto dto) {
         itemService.updateItem(id, dto);
-        return "items/itemList";
-    }
-
-
-    @GetMapping("/items")
-    public String list(Model model) {
-        List<Item> items = itemService.findAllItems();
-        model.addAttribute("items", items);
-        return "items/itemList";
+        return "redirect:/home";
     }
 }

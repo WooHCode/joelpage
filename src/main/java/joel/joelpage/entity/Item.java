@@ -1,6 +1,7 @@
 package joel.joelpage.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemCode itemCode;
 
+    @Builder
     public Item(Long id, String name, int price, String imgPath, String itemDes, ItemCode itemCode) {
         this.id = id;
         this.name = name;
