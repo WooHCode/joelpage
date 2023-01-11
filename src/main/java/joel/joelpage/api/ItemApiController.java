@@ -1,6 +1,7 @@
 package joel.joelpage.api;
 
 import joel.joelpage.dto.ItemDto;
+import joel.joelpage.dto.UpdateItemDto;
 import joel.joelpage.entity.Item;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.service.ItemService;
@@ -39,6 +40,10 @@ public class ItemApiController {
         Long id = itemService.saveItem(item);
         return new CreateItemResponse(id);
     }
+    @PutMapping("/api/v1/items/{itemId}")
+    public UpdateItemResponse updateItemV1(@PathVariable("itemId") Long itemId, @RequestBody UpdateItemDto dto){
+        return null;
+    }
 
     //id를 파라미터로 상품 1건 삭제
     @DeleteMapping("/api/v1/items/{itemId}")
@@ -72,5 +77,8 @@ public class ItemApiController {
         public CreateItemResponse(Long id) {
             this.id = id;
         }
+    }
+
+    private class UpdateItemResponse {
     }
 }

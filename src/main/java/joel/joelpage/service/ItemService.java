@@ -1,5 +1,6 @@
 package joel.joelpage.service;
 
+import joel.joelpage.dto.UpdateItemDto;
 import joel.joelpage.entity.Item;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.repository.ItemRepository;
@@ -23,10 +24,10 @@ public class ItemService {
     }
 
     /**
-     * 상품 이름으로 한건 조회
+     * 상품 id로 한건 조회
      */
-    public Item findOneItem(Item item) {
-        return itemRepository.findById(item.getId()).get();
+    public Item findOneItem(Long itemId) {
+        return itemRepository.findById(itemId).get();
     }
 
     /**
@@ -53,9 +54,11 @@ public class ItemService {
      *  상품을 id로 가져와 데이터 수정, 더티체킹으로 업데이트
      */
     @Transactional
-    public void updateItem(Long itemId, String itemName, int price, String imgPath, String itemDes , ItemCode itemCode) {
+    public void updateItem(Long itemId, UpdateItemDto updateItemDto) {
         Item item = itemRepository.findById(itemId).get();
-        item.toEntity(itemName,price,imgPath,itemDes,itemCode);
+        item.toEntity(
+                updateItemDto.getItemName(), updateItemDto.getPrice(),
+                updateItemDto.getImgPath(), updateItemDto.getItemDes(),updateItemDto.getItemCode());
     }
 
     @Transactional
