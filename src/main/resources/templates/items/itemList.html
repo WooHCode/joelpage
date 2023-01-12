@@ -27,6 +27,10 @@
                     <a href="#" th:href="@{/items/edit/{id} (id=${item.id})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
+                <td>
+                    <a href="#" th:href="@{/items/delete/{id} (id=${item.id})}"
+                       class="btn btn-primary" role="button">삭제</a>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -37,6 +37,12 @@ public class ItemController {
         return "items/itemList";
     }
 
+    @GetMapping("/items/delete/{id}")
+    public String deleteItem(@PathVariable Long id){
+        itemService.deleteItem(id);
+        return "redirect:/items";
+    }
+
     @GetMapping("/items/edit/{id}")
     public String updateItemForm(@PathVariable Long id, Model model) {
         UpdateItemDto updateItemDto = itemService.getUpdateItemDto(id);
@@ -60,4 +66,5 @@ public class ItemController {
         itemService.updateItem(dto.getId(), dto);
         return "redirect:/home";
     }
+
 }
