@@ -55,9 +55,9 @@ public class ItemController {
         return "redirect:/home";
     }
 
-    @PutMapping("/items/edit/{id}")
-    public String updateItem(@PathVariable("id") Long id, @RequestBody UpdateItemDto dto) {
-        itemService.updateItem(id, dto);
+    @PostMapping("/items/edit")
+    public String updateItem(UpdateItemDto dto) {
+        itemService.updateItem(dto.getId(), dto);
         return "redirect:/home";
     }
 }
