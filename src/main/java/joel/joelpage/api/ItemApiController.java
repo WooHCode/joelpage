@@ -42,7 +42,8 @@ public class ItemApiController {
     }
     @PutMapping("/api/v1/items/{itemId}")
     public UpdateItemResponse updateItemV1(@PathVariable("itemId") Long itemId, @RequestBody UpdateItemDto dto){
-        return null;
+        Long id = itemService.updateItem(itemId, dto);
+        return new UpdateItemResponse(id);
     }
 
     //id를 파라미터로 상품 1건 삭제
@@ -79,6 +80,12 @@ public class ItemApiController {
         }
     }
 
-    private class UpdateItemResponse {
+    @Data
+    static class UpdateItemResponse {
+        private Long id;
+
+        public UpdateItemResponse(Long id) {
+            this.id = id;
+        }
     }
 }
