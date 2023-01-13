@@ -36,6 +36,11 @@ public class ItemApiController {
                 .collect(Collectors.toList());
         return new Result(collect);
     }
+    //엔티티 스펙을 노출한 상품 한건 조회
+    @GetMapping("api/v1/items/{itemId}")
+    public Item findOneItem(@PathVariable("itemId") Long id) {
+        return itemService.findOneItem(id);
+    }
 
     @GetMapping("/api/v3/items")
     public Result findItemPages(Pageable pageable) {
