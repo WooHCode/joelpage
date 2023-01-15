@@ -19,7 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
-
+    
+.   //메인페이지로 이동
     @GetMapping("/")
     public String index() {
         return "/home";
