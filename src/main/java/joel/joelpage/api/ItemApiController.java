@@ -50,6 +50,7 @@ public class ItemApiController {
         Long id = itemService.saveItem(item);
         return new CreateItemResponse(id);
     }
+    //상품id를 파라미터로 한건 조회 후 수정
     @PutMapping("/api/v1/items/{itemId}")
     public UpdateItemResponse updateItemV1(@PathVariable("itemId") Long itemId, @RequestBody UpdateItemDto dto){
         Long id = itemService.updateItem(itemId, dto);
