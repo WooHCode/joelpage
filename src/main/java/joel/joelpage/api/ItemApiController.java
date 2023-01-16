@@ -51,14 +51,15 @@ public class ItemApiController {
         return new CreateItemResponse(id);
     }
     //상품id를 파라미터로 한건 조회 후 수정
-    @PutMapping("/api/v1/items/{itemId}")
+    @PostMapping("/api/v1/items/{itemId}")
     public UpdateItemResponse updateItemV1(@PathVariable("itemId") Long itemId, @RequestBody UpdateItemDto dto){
         Long id = itemService.updateItem(itemId, dto);
         return new UpdateItemResponse(id);
     }
 
-    @PutMapping("/api/v2/items/{itemName}")
-    public UpdateItemResponseName updateItemV2(@PathVariable("itemName") String name, @RequestBody UpdateItemDto dto) {
+    //상품 이름을 파라미터로 한건 조회 후 수정
+    @PatchMapping("/api/v2/items/{itemName}")
+    public UpdateItemResponseName updateItemV2(@PathVariable(name = "itemName") String name, @RequestBody UpdateItemDto dto) {
         String findName = itemService.updateItemByName(name, dto);
         return new UpdateItemResponseName(findName);
     }

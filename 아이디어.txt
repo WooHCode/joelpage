@@ -30,3 +30,8 @@ employee : id, emp_name, empName, workDate, empWorkCount,  empPay,  empAge, empD
 member : id, member_name, age, email, phone_num
 
 member -> item foreign key 
+
+
+issue
+-axios get 요청에서 pathvariable을 itemname 을 인자로 가져오는데 post요청 시 name을 변경하여 post요청을 날리면 트랜잭션에서 프록시에 name이 null로
+되어서 쿼리가 날아간다.
