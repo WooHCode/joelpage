@@ -39,6 +39,11 @@ public class ItemApiController {
         return itemService.findOneItem(id);
     }
 
+    @GetMapping("/api/v2/items/{itemName}")
+    public Item findOneItemByName(@PathVariable("itemName") String name) {
+        return itemService.findOneItemByName(name);
+    }
+
     //상품저장
     @PostMapping("/api/v1/items")
     public CreateItemResponse saveItemV1(@RequestBody Item item) {
@@ -49,6 +54,12 @@ public class ItemApiController {
     public UpdateItemResponse updateItemV1(@PathVariable("itemId") Long itemId, @RequestBody UpdateItemDto dto){
         Long id = itemService.updateItem(itemId, dto);
         return new UpdateItemResponse(id);
+    }
+
+    @PutMapping("/api/v2/items/{itemName}")
+    public UpdateItemResponseName updateItemV2(@PathVariable("itemName") String name, @RequestBody UpdateItemDto dto) {
+        String findName = itemService.updateItemByName(name, dto);
+        return new UpdateItemResponseName(findName);
     }
 
     //id를 파라미터로 상품 1건 삭제
@@ -91,6 +102,15 @@ public class ItemApiController {
 
         public UpdateItemResponse(Long id) {
             this.id = id;
+        }
+    }
+
+    @Data
+    static class UpdateItemResponseName {
+        private String name;
+
+        public UpdateItemResponseName(String name) {
+            this.name = name;
         }
     }
 }

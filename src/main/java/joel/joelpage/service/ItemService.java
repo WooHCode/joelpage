@@ -30,6 +30,13 @@ public class ItemService {
         return itemRepository.findById(itemId).get();
     }
 
+    /**
+     * 상품 이름로 한건 조회
+     */
+    public Item findOneItemByName(String itemName){
+       return itemRepository.findOneByName(itemName);
+    }
+
     @Transactional
     public UpdateItemDto getUpdateItemDto(Long id) {
         Item item = itemRepository.findById(id).get();
@@ -79,6 +86,13 @@ public class ItemService {
                 updateItemDto.getItemName(), updateItemDto.getPrice(),
                 updateItemDto.getImgPath(), updateItemDto.getItemDes(),updateItemDto.getItemCode());
         return item.getId();
+    }
+
+    @Transactional
+    public String updateItemByName(String name, UpdateItemDto dto) {
+        Item item = itemRepository.findOneByName(name);
+        item.toEntity(dto.getItemName(), dto.getPrice(), dto.getImgPath(), dto.getItemDes(), dto.getItemCode());
+        return item.getName();
     }
 
     @Transactional
