@@ -39,8 +39,8 @@ public class ItemApiController {
         return itemService.findOneItem(id);
     }
 
-    @GetMapping("/api/v2/items/{itemName}")
-    public Item findOneItemByName(@PathVariable("itemName") String name) {
+    @GetMapping("/api/v2/search/")
+    public Item findOneItemByName(@RequestParam String name) {
         return itemService.findOneItemByName(name);
     }
 
