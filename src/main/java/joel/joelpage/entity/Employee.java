@@ -5,13 +5,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Employee {
+public class Employee extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id", nullable = false)
@@ -19,9 +16,6 @@ public class Employee {
 
     @Column(name = "emp_name")
     private String empName;
-
-    @Column(name = "work_date")
-    private LocalDate workDate;
 
     @Column(name = "is_worked")
     private boolean isWorked;
@@ -32,15 +26,14 @@ public class Employee {
     private int empPay;
 
     @Column(name = "emp_age")
-    private String empAge;
+    private int empAge;
 
     @Column(name = "emp_description")
     private String empDescription;
 
-    public Employee(Long id, String empName, LocalDate workDate, boolean isWorked ,int empWorkCount, int empPay, String empAge, String empDescription) {
+    public Employee(Long id, String empName, boolean isWorked ,int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
-        this.workDate = workDate;
         this.isWorked = isWorked;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
@@ -48,9 +41,8 @@ public class Employee {
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName, LocalDate workDate, int empWorkCount, int empPay, String empAge, String empDescription) {
+    public void toEntity(String empName, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
-        this.workDate = workDate;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
         this.empAge = empAge;
