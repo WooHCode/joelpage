@@ -35,7 +35,7 @@ public class EmployeeService {
     @Transactional
     public void updateEmp(Long empId, UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(empId).get();
-        employee.toEntity(dto.getEmpName(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
+        employee.toEntity(dto.getEmpName(),dto.getGender(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
 
     }
 
