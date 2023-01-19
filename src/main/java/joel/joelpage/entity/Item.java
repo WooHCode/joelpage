@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // proxy 객체 생성을 위해 추가한다.
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "item_id", nullable = false)
     private Long id;
 
