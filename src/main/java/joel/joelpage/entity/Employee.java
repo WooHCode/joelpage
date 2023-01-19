@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Employee extends BaseTime{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "emp_id", nullable = false)
     private Long id;
 
@@ -18,7 +18,8 @@ public class Employee extends BaseTime{
     private String empName;
 
     @Column(name = "emp_gender")
-    private String empGender;
+    @Enumerated(EnumType.STRING)
+    private EmpGender empGender;
 
     @Column(name = "is_worked")
     private boolean isWorked;
@@ -34,7 +35,7 @@ public class Employee extends BaseTime{
     @Column(name = "emp_description")
     private String empDescription;
 
-    public Employee(Long id, String empName,String gender, boolean isWorked ,int empWorkCount, int empPay, int empAge, String empDescription) {
+    public Employee(Long id, String empName,EmpGender gender, boolean isWorked ,int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
         this.empGender = gender;
@@ -45,7 +46,7 @@ public class Employee extends BaseTime{
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName,String gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public void toEntity(String empName,EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;

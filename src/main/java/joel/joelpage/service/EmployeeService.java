@@ -44,6 +44,12 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(empId).get();
     }
 
+    @Transactional
+    public void deleteEmp(Long id) {
+        Employee employee = employeeRepository.findById(id).get();
+        employeeRepository.delete(employee);
+    }
+
     static void isAdded() {
 
     }

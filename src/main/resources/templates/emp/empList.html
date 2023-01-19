@@ -26,11 +26,11 @@
                 <td th:text="${emp.empPay}"></td>
                 <td th:text="${emp.empDescription}"></td>
                 <td>
-                    <a href="#" th:href="@{/ems/edit/{id} (id=${emp.id})}"
+                    <a href="#" th:href="@{/emp/edit/{id} (id=${emp.id})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
                 <td>
-                    <a href="#" th:href="@{/ems/delete/{id} (id=${emp.id})}"
+                    <a href="#" th:href="@{/emp/delete/{id} (id=${emp.id})}"
                        class="btn btn-primary" role="button">삭제</a>
                 </td>
             </tr>
