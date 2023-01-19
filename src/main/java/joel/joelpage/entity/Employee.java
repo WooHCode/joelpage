@@ -18,7 +18,7 @@ public class Employee extends BaseTime{
     private String empName;
 
     @Column(name = "emp_gender")
-    private Gender empGender;
+    private String empGender;
 
     @Column(name = "is_worked")
     private boolean isWorked;
@@ -34,7 +34,7 @@ public class Employee extends BaseTime{
     @Column(name = "emp_description")
     private String empDescription;
 
-    public Employee(Long id, String empName,Gender gender, boolean isWorked ,int empWorkCount, int empPay, int empAge, String empDescription) {
+    public Employee(Long id, String empName,String gender, boolean isWorked ,int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
         this.empGender = gender;
@@ -45,7 +45,7 @@ public class Employee extends BaseTime{
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName,Gender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public void toEntity(String empName,String gender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;
