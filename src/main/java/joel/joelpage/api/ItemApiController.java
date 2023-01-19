@@ -1,6 +1,5 @@
 package joel.joelpage.api;
 
-import joel.joelpage.dto.ItemDto;
 import joel.joelpage.dto.UpdateItemDto;
 import joel.joelpage.entity.Item;
 import joel.joelpage.entity.ItemCode;
@@ -60,11 +59,6 @@ public class ItemApiController {
         return list;
     }
 
-    //엔티티 스펙을 노출한 상품 한건 조회
-    @GetMapping("/api/v1/items/{itemId}")
-    public Item findOneItem(@PathVariable("itemId") Long id) {
-        return itemService.findOneItem(id);
-    }
 
     @GetMapping("/api/v2/items/{itemName}")
     public Item findOneByName(@PathVariable("itemName") String name) {
