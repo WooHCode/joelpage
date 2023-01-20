@@ -4,9 +4,10 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import joel.joelpage.entity.EmpGender;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
-@Getter
+@Data
 public class UpdateEmployeeDto {
     private Long id;
     private String empName;

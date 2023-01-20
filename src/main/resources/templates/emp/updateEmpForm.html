@@ -8,35 +8,36 @@
 <div class="container">
     <form action="/emp/edit" th:object="${form}" method="post">
         <div class="form-group">
-            <label th:for="name">상품명</label>
+            <label th:for="empName">직원 이름</label>
             <input type="hidden" th:field="*{Id}">
-            <input type="text" th:field="*{itemName}" class="form-control"
+            <input type="text" th:field="*{empName}" class="form-control"
                    placeholder="이름을 입력하세요">
         </div>
         <div class="form-group">
-            <label th:for="price">가격</label>
-            <input type="number" th:field="*{price}" class="form-control"
-                   placeholder="가격을 입력하세요">
+            <label th:for="empGender">성별</label>
+            <input type="checkbox" th:field="*{empGender}" class="form-control" value="M"
+            >남자
+            <input type="checkbox" th:field="*{empGender}" class="form-control" value="W"
+            >여자
         </div>
         <div class="form-group">
-            <label th:for="imgPath">사진링크</label>
-            <input type="text" th:field="*{imgPath}" class="form-control"
-                   placeholder="사진링크를 입력하세요">
+            <label th:for="empAge">나이</label>
+            <input type="number" th:field="*{empAge}" class="form-control"
+                   placeholder="나이를 입력하세요">
         </div>
         <div class="form-group">
-            <label th:for="itemCode">아이템 코드</label>
-            <select th:field="*{itemCode}">
-                <option th:each="itemCode : ${T(joel.joelpage.entity.ItemCode).values()}"
-                        th:value="${itemCode}"
-                        th:text="${itemCode}">
-                </option>
-            </select>
+            <label th:for="empWorkCount">직원출근횟수</label>
+            <input type="number" th:field="*{empWorkCount}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label th:for="empPay">직원급여</label>
+            <input type="number" th:field="*{empPay}" class="form-control">원
         </div>
 
         <div class="form-group">
-            <label th:for="itemDes">상품설명</label>
-            <input type="text" style="width:300px;height:200px;font-size:22px;" th:field="*{itemDes}" class="form-control"
-                   placeholder="상품설명을 입력하세요">
+            <label th:for="empDescription">직원 상세설명</label>
+            <input type="text" style="width:300px;height:200px;font-size:22px;" th:field="*{empDescription}" class="form-control"
+                   placeholder="상세설명">
         </div> <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
