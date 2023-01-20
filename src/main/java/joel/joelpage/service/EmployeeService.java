@@ -17,13 +17,25 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public Long findOneEmp(Employee employee) {
-        Employee emp = employeeRepository.findById(employee.getId()).get();
-        return emp.getId();
+    public Employee findOneEmp(Long id) {
+       return employeeRepository.findById(id).get();
+
     }
 
     public List<Employee> findAllEmp() {
         return employeeRepository.findAll();
+    }
+
+    public UpdateEmployeeDto getUpdateEmployee(Long id){
+        Employee employee = employeeRepository.findById(id).get();
+        return UpdateEmployeeDto.builder()
+                .empAge(employee.getEmpAge())
+                .empDescription(employee.getEmpDescription())
+                .empName(employee.getEmpName())
+                .gender(employee.getEmpGender())
+                .empPay(employee.getEmpPay())
+                .empWorkCount(employee.getEmpWorkCount())
+                .build();
     }
 
     @Transactional
@@ -36,7 +48,6 @@ public class EmployeeService {
     public void updateEmp(Long empId, UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(empId).get();
         employee.toEntity(dto.getEmpName(),dto.getGender(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
-
     }
 
     @Transactional

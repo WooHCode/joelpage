@@ -1,6 +1,7 @@
 package joel.joelpage.controller;
 
 import joel.joelpage.dto.EmpDto;
+import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,17 @@ public class EmpController {
     private String empDelete(@PathVariable Long id) {
         employeeService.deleteEmp(id);
         return "redirect:/emp";
+    }
+    @GetMapping("/emp/edit/{id}")
+    public String empEdit(@PathVariable Long id, Model model) {
+        UpdateEmployeeDto dto = employeeService.getUpdateEmployee(id);
+        model.addAttribute("form", dto);
+        return "emp/updateEmpForm";
+    }
+
+    @PostMapping("/emp/edit")
+    public String empEdit(Long id ,UpdateEmployeeDto dto) {
+        employeeService.updateEmp(id, dto);
+        return "redirect:/home";
     }
 }
