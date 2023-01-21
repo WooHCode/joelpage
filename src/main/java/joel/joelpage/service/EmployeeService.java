@@ -26,7 +26,7 @@ public class EmployeeService {
     public List<Employee> findAllEmp() {
         return employeeRepository.findAll();
     }
-.   /** 데이터 dto에 id로 한건 조회 후 저장 */
+    /** 데이터 dto에 id로 한건 조회 후 저장 */
     public UpdateEmployeeDto getUpdateEmployee(Long id){
         Employee employee = employeeRepository.findById(id).get();
         return UpdateEmployeeDto.builder()
