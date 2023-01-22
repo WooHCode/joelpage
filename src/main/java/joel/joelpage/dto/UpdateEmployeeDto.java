@@ -1,27 +1,31 @@
 package joel.joelpage.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import joel.joelpage.entity.EmpGender;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class UpdateEmployeeDto {
     private Long id;
     private String empName;
-    @Enumerated(EnumType.STRING)
-    private EmpGender gender;
+    private EmpGender empGender;
     private int empWorkCount;
     private int empPay;
     private int empAge;
     private String empDescription;
 
+    public void setGender(EmpGender gender) {
+        this.empGender = gender;
+    }
+
     @Builder
     public UpdateEmployeeDto(String empName, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
-        this.gender = gender;
+        this.empGender = gender;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
         this.empAge = empAge;
