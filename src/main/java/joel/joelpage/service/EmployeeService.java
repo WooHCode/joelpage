@@ -40,12 +40,14 @@ public class EmployeeService {
                 .build();
     }
 
+    /** 직원 데이터 한 건 저장 */
     @Transactional
     public Long saveEmp(Employee employee) {
         Employee savedEmp = employeeRepository.save(employee);
         return savedEmp.getId();
     }
 
+    /** 직원 데이터 Object로 가져와서 전체 데이터 수정 */
     @Transactional
     public void updateEmp(UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(dto.getId()).get();
