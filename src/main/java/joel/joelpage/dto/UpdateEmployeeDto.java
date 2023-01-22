@@ -23,7 +23,8 @@ public class UpdateEmployeeDto {
     }
 
     @Builder
-    public UpdateEmployeeDto(String empName, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public UpdateEmployeeDto(Long id, String empName, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+        this.id = id;
         this.empName = empName;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;

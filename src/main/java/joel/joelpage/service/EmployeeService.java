@@ -30,6 +30,7 @@ public class EmployeeService {
     public UpdateEmployeeDto getUpdateEmployee(Long id){
         Employee employee = employeeRepository.findById(id).get();
         return UpdateEmployeeDto.builder()
+                .id(employee.getId())
                 .empAge(employee.getEmpAge())
                 .empDescription(employee.getEmpDescription())
                 .empName(employee.getEmpName())
