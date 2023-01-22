@@ -17,15 +17,16 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    /** id 값으로 데이터 한건 조회 */
     public Employee findOneEmp(Long id) {
        return employeeRepository.findById(id).get();
 
     }
-
+    /** 데이터 전체 조회 */
     public List<Employee> findAllEmp() {
         return employeeRepository.findAll();
     }
-
+    /** 데이터 dto에 id로 한건 조회 후 저장 */
     public UpdateEmployeeDto getUpdateEmployee(Long id){
         Employee employee = employeeRepository.findById(id).get();
         return UpdateEmployeeDto.builder()
