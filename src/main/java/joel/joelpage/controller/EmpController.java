@@ -22,7 +22,7 @@ public class EmpController {
         model.addAttribute("ems", allEmp);
         return "emp/empList";
     }
-
+    // ems 폼으로 받아 createform으로 전달
     @GetMapping("/emp/new")
     public String empCreate(Model model) {
         model.addAttribute("ems",new EmpDto());
