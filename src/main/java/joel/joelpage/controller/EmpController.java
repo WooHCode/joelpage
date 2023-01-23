@@ -36,7 +36,7 @@ public class EmpController {
         employeeService.saveEmp(employee);
         return "redirect:/home";
     }
-
+    //한건 삭제
     @GetMapping("/emp/delete/{id}")
     private String empDelete(@PathVariable Long id) {
         employeeService.deleteEmp(id);
@@ -48,7 +48,7 @@ public class EmpController {
         model.addAttribute("form", dto);
         return "emp/updateEmpForm";
     }
-
+    //한 건 수정
     @PostMapping("/emp/edit")
     public String empEdit(@ModelAttribute UpdateEmployeeDto dto) {
         employeeService.updateEmp(dto);
