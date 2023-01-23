@@ -5,8 +5,6 @@ admin page: 상품등록(리스트 형식으로 변경, 상품 링크 추가), �
 파트타임, 직원(empCode)
 출근시간, 출근날짜, if(파트타임) 시간 * 출근날짜 횟수 / if(직원) 월급설정가능(empPay)
 
-
-
 이미지 호스팅 - amazon s3 or google drive or ebay
 메인페이지에 매출 그래프 표시(chart.js), 필요 데이터(일별 매출)
 
@@ -29,7 +27,7 @@ entity : member, item, board, employee,
 
 item: id, item_name, price, description, img_path, item_code
 
-employee : id, emp_name, empName, workDate, empWorkCount,  empPay,  empAge, empDescription
+employee : id, emp_name, emp_gender, empName, workDate, empWorkCount,  empPay,  empAge, empDescription
 
 member : id, member_name, age, email, phone_num
 
