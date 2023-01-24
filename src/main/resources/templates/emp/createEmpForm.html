@@ -15,9 +15,9 @@
         </div>
         <div class="form-group">
             <label th:for="empGender">성별</label>
-            <input type="checkbox" th:field="*{empGender}" class="form-control" value="M"
+            <input type="checkbox" th:field="*{empGender}" class="form-control" style="width:5px;" value="M"
                    >남자
-            <input type="checkbox" th:field="*{empGender}" class="form-control" value="W"
+            <input type="checkbox" th:field="*{empGender}" class="form-control" style="width:5px;" value="W"
                    >여자
         </div>
         <div class="form-group">
@@ -48,4 +48,10 @@
     <br/>
 </div>
 </body>
+<style>
+    .form-control {
+        width: 5px;
+    }
+
+</style>
 </html>
