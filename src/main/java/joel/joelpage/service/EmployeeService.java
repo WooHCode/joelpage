@@ -22,6 +22,9 @@ public class EmployeeService {
        return employeeRepository.findById(id).get();
 
     }
+    public List<Employee> findAll(){
+        return employeeRepository.findAll();
+    }
     /** 데이터 전체 조회 */
     public List<Employee> findAllEmp() {
         return employeeRepository.findAllDesc();
