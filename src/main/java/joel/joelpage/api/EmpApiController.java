@@ -6,6 +6,7 @@ import joel.joelpage.entity.Employee;
 import joel.joelpage.service.EmployeeService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,13 @@ public class EmpApiController {
     public List<Employee> findAll() {
         return employeeService.findAll();
     }
+
+    @GetMapping("/api/v3/emp")
+    public List<Employee> findPage(Pageable pageable) {
+        List<Employee> employeeList = employeeService.findAllWithPage(pageable).getContent();
+        return employeeList;
+    }
+
     @PostMapping("/api/v1/emp/save")
     public CreateEmpResponse saveEmp(@RequestBody Employee employee) {
         Long id = employeeService.saveEmp(employee);

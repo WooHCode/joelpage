@@ -3,7 +3,10 @@ package joel.joelpage.service;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.repository.EmployeeRepository;
+import joel.joelpage.repository.PageableEmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +19,7 @@ import java.util.List;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final PageableEmployeeRepository pageableEmployeeRepository;
 
     /** id 값으로 데이터 한건 조회 */
     public Employee findOneEmp(Long id) {
@@ -25,6 +29,12 @@ public class EmployeeService {
     public List<Employee> findAll(){
         return employeeRepository.findAll();
     }
+
+    public Page<Employee> findAllWithPage(Pageable pageable) {
+        Page<Employee> map = pageableEmployeeRepository.findAll(pageable).map(employee -> employee);
+        return map;
+    }
+
     /** 데이터 전체 조회 */
     public List<Employee> findAllEmp() {
         return employeeRepository.findAllDesc();
