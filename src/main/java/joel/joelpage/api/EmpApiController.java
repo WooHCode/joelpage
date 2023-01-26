@@ -36,10 +36,10 @@ public class EmpApiController {
     public List<Number> findPageCount(Pageable pageable) {
         long totalElements = employeeService.findAllWithPage(pageable).getTotalElements();
         int totalPages = employeeService.findAllWithPage(pageable).getTotalPages();
-        List<Number> reList = new ArrayList<>();
-        reList.add(0,totalPages);
-        reList.add(1, totalElements);
-        return reList;
+        List<Number> resList = new ArrayList<>();
+        resList.add(0,totalPages);
+        resList.add(1, totalElements);
+        return resList;
     }
 
     @PostMapping("/api/v1/emp/save")
