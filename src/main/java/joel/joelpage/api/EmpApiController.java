@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,15 @@ public class EmpApiController {
     public List<Employee> findPage(Pageable pageable) {
         List<Employee> employeeList = employeeService.findAllWithPage(pageable).getContent();
         return employeeList;
+    }
+    @GetMapping("/api/v3/emp/total")
+    public List<Number> findPageCount(Pageable pageable) {
+        long totalElements = employeeService.findAllWithPage(pageable).getTotalElements();
+        int totalPages = employeeService.findAllWithPage(pageable).getTotalPages();
+        List<Number> reList = new ArrayList<>();
+        reList.add(0,totalPages);
+        reList.add(1, totalElements);
+        return reList;
     }
 
     @PostMapping("/api/v1/emp/save")
