@@ -12,7 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,9 +39,21 @@ public class ItemApiController {
     }
 
     @GetMapping("/api/v3/items")
-    public void findItemPages(Pageable pageable) {
-        Page<Item> itemPage = itemService.findAllItemPages(pageable);
+    public Result findItemPages(Pageable pageable) {
+        List<Item> items = itemService.findAllItemPages(pageable).getContent();
+        List<ItemDto> collect = items.stream().map(i -> new ItemDto(i.getId(), i.getName(), i.getPrice(), i.getImgPath(), i.getItemDes(), i.getItemCode()))
+                .collect(Collectors.toList());
+        return new Result(collect);
+    }
 
+    @GetMapping("/api/v3/items/count")
+    public List<Object> findTotalPageCountAndTotalElement(Pageable pageable) {
+        int totalPages = itemService.findAllItemPages(pageable).getTotalPages();
+        long totalElements = itemService.findAllItemPages(pageable).getTotalElements();
+        List<Object> list = new ArrayList<>();
+        list.add(0,totalPages);
+        list.add(1,totalElements);
+        return list;
     }
 
     //엔티티 스펙을 노출한 상품 한건 조회
