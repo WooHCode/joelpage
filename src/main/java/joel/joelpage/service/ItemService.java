@@ -5,6 +5,8 @@ import joel.joelpage.entity.Item;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,14 @@ public class ItemService {
      * */
     public List<Item> findAllItems() {
         return itemRepository.findAll();
+    }
+
+    /**
+     * 전체 상품 페이지로 조회
+     */
+    public Page<Item> findAllItemPages(Pageable pageable) {
+        Page<Item> items = itemRepository.findAll(pageable).map(item -> item);
+        return items;
     }
 
     /**

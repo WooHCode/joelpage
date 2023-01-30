@@ -8,6 +8,8 @@ import joel.joelpage.service.ItemService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +35,15 @@ public class ItemApiController {
                 .collect(Collectors.toList());
         return new Result(collect);
     }
+
+    @GetMapping("/api/v3/items")
+    public void findItemPages(Pageable pageable) {
+        Page<Item> itemPage = itemService.findAllItemPages(pageable);
+
+    }
+
     //엔티티 스펙을 노출한 상품 한건 조회
-    @GetMapping("api/v1/items/{itemId}")
+    @GetMapping("/api/v1/items/{itemId}")
     public Item findOneItem(@PathVariable("itemId") Long id) {
         return itemService.findOneItem(id);
     }
