@@ -14,4 +14,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e ORDER BY e.id ASC")
     List<Employee> findAllDesc();
 
+    Page<Employee> findAll(Pageable pageable);
 }

@@ -1,6 +1,5 @@
 package joel.joelpage.dto;
 
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import joel.joelpage.entity.EmpGender;
 import lombok.Data;
