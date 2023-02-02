@@ -67,9 +67,14 @@ public class ItemApiController {
        return itemService.findOneItemByName(name);
     }
 
-    @GetMapping("/api/v2/search/")
+    @GetMapping("/api/v1/search/")
     public Item findOneItemByName(@RequestParam String name) {
         return itemService.findOneItemByName(name);
+    }
+
+    @GetMapping("/api/v2/search")
+    public List<Item> findItemListLike(@RequestParam String likeName) {
+        return itemService.findItemsByNameLike(likeName);
     }
 
     //상품저장

@@ -2,7 +2,6 @@ package joel.joelpage.service;
 
 import joel.joelpage.dto.UpdateItemDto;
 import joel.joelpage.entity.Item;
-import joel.joelpage.entity.ItemCode;
 import joel.joelpage.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,6 +44,18 @@ public class ItemService {
      */
     public Item findOneItemByName(String itemName){
        return itemRepository.findOneByName(itemName);
+    }
+
+    /**
+     * 상품 이름으로 여러 건 조회(Like Query)
+     */
+    public List<Item> findItemsByNameLike(String likeName) {
+        List<Item> nameLike = itemRepository.findByNameLike("%"+likeName+"%");
+        if (nameLike.isEmpty()){
+            System.out.println("비어있습니다.");
+            return null;
+        }
+        return nameLike;
     }
 
     @Transactional

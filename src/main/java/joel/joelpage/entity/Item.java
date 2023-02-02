@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor // proxy 객체 생성을 위해 추가한다.
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
