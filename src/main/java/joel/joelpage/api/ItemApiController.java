@@ -76,6 +76,11 @@ public class ItemApiController {
     public List<Item> findItemListLike(@RequestParam String likeName) {
         return itemService.findItemsByNameLike(likeName);
     }
+
+    /**
+     * 이름으로 조회 후 페이지네이션 값을 전달
+     * 페이지 자료형에 기본적으로 totalElements와 totalPages를 제공하지만 api에서 편하게 사용하기 위해서 직접 제공한다.
+     */
     @GetMapping("/api/v3/search")
     public List<Object> findItemListPage(@RequestParam String likeName, Pageable pageable) {
         Page<Item> itemPage = itemService.findItemsByNameLikePage(likeName, pageable);
