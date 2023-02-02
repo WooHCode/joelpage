@@ -76,6 +76,17 @@ public class ItemApiController {
     public List<Item> findItemListLike(@RequestParam String likeName) {
         return itemService.findItemsByNameLike(likeName);
     }
+    @GetMapping("/api/v3/search")
+    public List<Object> findItemListPage(@RequestParam String likeName, Pageable pageable) {
+        Page<Item> itemPage = itemService.findItemsByNameLikePage(likeName, pageable);
+        long totalElements = itemService.findItemsByNameLikePage(likeName, pageable).getTotalElements();
+        int totalPages = itemService.findItemsByNameLikePage(likeName, pageable).getTotalPages();
+        List<Object> resultList = new ArrayList<>();
+        resultList.add(0,itemPage);
+        resultList.add(1,totalElements);
+        resultList.add(2,totalPages);
+        return resultList;
+    }
 
     //상품저장
     @PostMapping("/api/v1/items")
