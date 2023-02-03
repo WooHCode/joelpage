@@ -1,10 +1,12 @@
 package joel.joelpage.api;
 
 import joel.joelpage.dto.UpdateEmployeeDto;
+import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.service.EmployeeService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +41,17 @@ public class EmpApiController {
         resList.add(0,totalPages);
         resList.add(1, totalElements);
         return resList;
+    }
+
+    @GetMapping("/api/v1/emp/search")
+    public Page<Employee> findEmpWithEmpGender(@RequestParam EmpGender empGender, Pageable pageable) {
+        Page<Employee> genderPage = employeeService.findByGenderPage(empGender, pageable);
+        return genderPage;
+    }
+
+    @GetMapping("/api/v2/emp/search")
+    public Page<Employee> findEmpWithEmpName(@RequestParam String empName, Pageable pageable) {
+        return employeeService.findByEmpNamePage(empName, pageable);
     }
 
     @PostMapping("/api/v1/emp/save")

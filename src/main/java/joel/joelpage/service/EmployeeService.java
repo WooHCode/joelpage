@@ -37,6 +37,9 @@ public class EmployeeService {
         Page<Employee> findEmpByGender = employeeRepository.findByEmpGender(gender, pageable);
         return findEmpByGender;
     }
+    public Page<Employee> findByEmpNamePage(String empName, Pageable pageable) {
+        return employeeRepository.findByEmpName(empName, pageable);
+    }
 
     /** 데이터 전체 조회 */
     public List<Employee> findAllEmp() {
@@ -84,6 +87,7 @@ public class EmployeeService {
     static void isAdded() {
 
     }
+
 
 
 }
