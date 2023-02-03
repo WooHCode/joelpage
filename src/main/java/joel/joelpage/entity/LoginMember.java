@@ -10,10 +10,10 @@ public class LoginMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "login_id", nullable = false)
-    private Long id;
+    @Column(name = "login_seq", nullable = false)
+    private Long seq;
 
-    @Column(name = "member_ide", nullable = false)
+    @Column(name = "member_id", nullable = false)
     private String memberId;
 
     @Column(name = "member_pw", nullable = false, length = 100)

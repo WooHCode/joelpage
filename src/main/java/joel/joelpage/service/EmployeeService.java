@@ -1,6 +1,7 @@
 package joel.joelpage.service;
 
 import joel.joelpage.dto.UpdateEmployeeDto;
+import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,10 @@ public class EmployeeService {
     public Page<Employee> findAllWithPage(Pageable pageable) {
         Page<Employee> map = employeeRepository.findAll(pageable).map(employee -> employee);
         return map;
+    }
+    public Page<Employee> findByGenderPage(EmpGender gender, Pageable pageable) {
+        Page<Employee> findEmpByGender = employeeRepository.findByEmpGender(gender, pageable);
+        return findEmpByGender;
     }
 
     /** 데이터 전체 조회 */

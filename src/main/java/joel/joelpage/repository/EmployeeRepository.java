@@ -1,5 +1,6 @@
 package joel.joelpage.repository;
 
+import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.entity.Item;
 import org.springframework.data.domain.Page;
@@ -15,4 +16,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findAllDesc();
 
     Page<Employee> findAll(Pageable pageable);
+
+    Page<Employee> findByEmpGender(EmpGender empGender, Pageable pageable);
 }
