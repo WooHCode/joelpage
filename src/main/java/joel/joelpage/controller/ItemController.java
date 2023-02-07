@@ -27,8 +27,8 @@ public class ItemController {
     }
 
     @GetMapping("/items/new")
-    public String createItemForm(Model model) {
-        model.addAttribute("form", new ItemDto());
+        public String createItemForm(Model model) {
+            model.addAttribute("form", new ItemDto());
         return "items/createItemForm";
     }
     @GetMapping("/items")
