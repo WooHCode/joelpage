@@ -70,7 +70,7 @@ public class EmployeeService {
     @Transactional
     public void updateEmp(UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(dto.getId()).get();
-        employee.toEntity(dto.getEmpName(),dto.getEmpGender(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
+        employee.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getWorkDate(),dto.getEmpGender(), dto.getEmpWorkCount(),dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
     }
 /** id로 한 건을 가져와 workDate가 변경되면 count 1증가 */ 
     @Transactional

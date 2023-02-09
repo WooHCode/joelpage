@@ -6,12 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class UpdateEmployeeDto {
     private Long id;
     private String empName;
+    private String empPhone;
+    private String empEmail;
+    private LocalDateTime workDate;
     private EmpGender empGender;
     private int empWorkCount;
     private int empPay;

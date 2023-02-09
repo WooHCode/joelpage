@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Employee extends BaseTime{
+public class Employee extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id", nullable = false)
@@ -59,8 +59,11 @@ public class Employee extends BaseTime{
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public void toEntity(String empName, String empPhone, String empEmail, LocalDateTime workDate, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
+        this.empPhone = empPhone;
+        this.empEmail = empEmail;
+        this.workDate = workDate;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;

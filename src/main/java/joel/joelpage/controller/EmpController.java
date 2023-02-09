@@ -32,7 +32,7 @@ public class EmpController {
     @PostMapping("/emp/new")
     public String empCreateForm(EmpDto dto) {
         Employee employee = new Employee();
-        employee.toEntity(dto.getEmpName(), dto.getEmpGender(),dto.getEmpWorkCount(),dto.getEmpPay(),dto.getEmpAge(), dto.getEmpDescription());
+        employee.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getWorkDate(),dto.getEmpGender(),dto.getEmpWorkCount(),dto.getEmpPay(),dto.getEmpAge(), dto.getEmpDescription());
         employeeService.saveEmp(employee);
         return "redirect:/home";
     }
