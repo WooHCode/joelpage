@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -15,6 +17,15 @@ public class Employee extends BaseTime{
 
     @Column(name = "emp_name")
     private String empName;
+
+    @Column(name = "emp_phone")
+    private String empPhone;
+
+    @Column(name = "emp_email")
+    private String empEmail;
+
+    @Column(name = "work_date")
+    private LocalDateTime workDate;
 
     @Column(name = "emp_gender")
     @Enumerated(EnumType.STRING)
@@ -34,10 +45,13 @@ public class Employee extends BaseTime{
     @Column(name = "emp_description")
     private String empDescription;
 
-    public Employee(Long id, String empName,EmpGender gender, boolean isWorked ,int empWorkCount, int empPay, int empAge, String empDescription) {
+    public Employee(Long id, String empName, String empPhone, String empEmail, LocalDateTime workDate, EmpGender empGender, boolean isWorked, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
-        this.empGender = gender;
+        this.empPhone = empPhone;
+        this.empEmail = empEmail;
+        this.workDate = workDate;
+        this.empGender = empGender;
         this.isWorked = isWorked;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
@@ -45,7 +59,7 @@ public class Employee extends BaseTime{
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName,EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public void toEntity(String empName, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;

@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 public class BaseTime {
 
     @CreatedDate
-    @Column(name = "work_date", updatable = false)
-    private LocalDate workDate;
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
