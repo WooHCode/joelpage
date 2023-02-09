@@ -28,9 +28,12 @@ public class UpdateEmployeeDto {
     }
 
     @Builder
-    public UpdateEmployeeDto(Long id, String empName, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public UpdateEmployeeDto(Long id, String empName, EmpGender gender, String empPhone, String empEmail, LocalDateTime workDate, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
+        this.empPhone = empPhone;
+        this.empEmail = empEmail;
+        this.workDate = workDate;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
