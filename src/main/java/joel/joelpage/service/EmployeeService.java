@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -92,8 +93,15 @@ public class EmployeeService {
         int plusWorkCount = 0;
         int totalEmpPay = 0;
         if (employee.getWorkDate() != dto.getWorkDate()) {
+            System.out.println("dto.getWorkDate() = " + dto.getWorkDate());
+            System.out.println("employee.getWorkDate() = " + employee.getWorkDate());
+            Duration difference = Duration.between( (employee.getWorkDate()).toLocalTime(),(dto.getWorkDate()).toLocalTime());
             plusWorkCount = employee.getEmpWorkCount() + 1;
-            totalEmpPay = plusWorkCount * payPerHour;
+            System.out.println("차이시간: " + (int)difference.getSeconds());
+            int diffWorkTime = ((int) difference.getSeconds() / 3600);
+            System.out.println("diffWorkTime = " + diffWorkTime);
+            totalEmpPay = diffWorkTime * payPerHour;
+            System.out.println("totalEmpPay = " + totalEmpPay);
         }
         employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getWorkDate(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
     }
