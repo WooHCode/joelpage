@@ -19,6 +19,7 @@ import java.util.List;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private static final int payPerHour = 9000;
 
     /**
      * id 값으로 데이터 한건 조회
@@ -88,10 +89,13 @@ public class EmployeeService {
     @Transactional
     public void updateEmp(UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(dto.getId()).get();
+        int plusWorkCount = 0;
+        int totalEmpPay = 0;
         if (employee.getWorkDate() != dto.getWorkDate()) {
-            int plusWorkCount = employee.getEmpWorkCount() + 1;
-            employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getWorkDate(), dto.getEmpGender(), plusWorkCount, dto.getEmpPay(), dto.getEmpAge(), dto.getEmpDescription());
+            plusWorkCount = employee.getEmpWorkCount() + 1;
+            totalEmpPay = plusWorkCount * payPerHour;
         }
+        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getWorkDate(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
     }
 
     /**

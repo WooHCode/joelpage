@@ -31,7 +31,7 @@
                 <td th:text="${emp.empGender}"></td>
                 <td th:text="${emp.isWorked}"></td>
                 <td th:text="${emp.empWorkCount}"></td>
-                <td th:text="${emp.empPay}"></td>
+                <td th:text="${emp.empPay} + '원'"></td>
                 <td th:text="${emp.empDescription}"></td>
                 <td>
                     <a href="#" th:href="@{/emp/edit/{id} (id=${emp.id})}"
