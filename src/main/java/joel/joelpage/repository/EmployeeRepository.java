@@ -20,4 +20,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Page<Employee> findByEmpGender(EmpGender empGender, Pageable pageable);
 
     Page<Employee> findByEmpName(String empName, Pageable pageable);
+
+    Employee findByEmpName(String empName);
 }

@@ -45,6 +45,10 @@ public class EmployeeService {
         return findEmpByGender;
     }
 
+    public Employee findByEmpName(String empName) {
+        return employeeRepository.findByEmpName(empName);
+    }
+
     public Page<Employee> findByEmpNamePage(String empName, Pageable pageable) {
         return employeeRepository.findByEmpName(empName, pageable);
     }
@@ -86,7 +90,7 @@ public class EmployeeService {
 
     /**
      * 직원 데이터 Object로 가져와서 전체 데이터 수정
-     *
+     * 출근시간과 퇴근시간을 받아서 시간단위만 가져와 시급을 곱하여 엔티티에 저장
      */
     @Transactional
     public void updateEmp(UpdateEmployeeDto dto) {

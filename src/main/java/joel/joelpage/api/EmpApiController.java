@@ -1,5 +1,6 @@
 package joel.joelpage.api;
 
+import joel.joelpage.dto.EmpDto;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
@@ -41,6 +42,25 @@ public class EmpApiController {
         resList.add(0,totalPages);
         resList.add(1, totalElements);
         return resList;
+    }
+
+    @GetMapping("/empDetail/api/v1/emp/{searchName}")
+    public EmpDto findOneEmpByName(@PathVariable(value = "searchName") String name) {
+        Employee findEmp = employeeService.findByEmpName(name);
+        EmpDto resultEmp = EmpDto.builder()
+                .id(findEmp.getId())
+                .name(findEmp.getEmpName())
+                .email(findEmp.getEmpEmail())
+                .phone(findEmp.getEmpPhone())
+                .workDate(findEmp.getWorkDate())
+                .gender(findEmp.getEmpGender())
+                .isWorked(findEmp.isWorked())
+                .workCount(findEmp.getEmpWorkCount())
+                .pay(findEmp.getEmpPay())
+                .age(findEmp.getEmpAge())
+                .empDesc(findEmp.getEmpDescription())
+                .build();
+        return resultEmp;
     }
 
     @GetMapping("/api/v1/emp/search")
