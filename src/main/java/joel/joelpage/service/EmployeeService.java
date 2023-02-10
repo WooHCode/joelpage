@@ -92,16 +92,12 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(dto.getId()).get();
         int plusWorkCount = 0;
         int totalEmpPay = 0;
-        if (employee.getWorkDate() != dto.getWorkDate()) {
-            System.out.println("dto.getWorkDate() = " + dto.getWorkDate());
-            System.out.println("employee.getWorkDate() = " + employee.getWorkDate());
-            Duration difference = Duration.between( (employee.getWorkDate()).toLocalTime(),(dto.getWorkDate()).toLocalTime());
+        if (employee.getWorkDate() != dto.getWorkDate()) if (employee.getWorkDate() != null) {
+            Duration difference = Duration.between((employee.getWorkDate()).toLocalTime(), (dto.getWorkDate()).toLocalTime());
             plusWorkCount = employee.getEmpWorkCount() + 1;
-            System.out.println("차이시간: " + (int)difference.getSeconds());
             int diffWorkTime = ((int) difference.getSeconds() / 3600);
-            System.out.println("diffWorkTime = " + diffWorkTime);
             totalEmpPay = diffWorkTime * payPerHour;
-            System.out.println("totalEmpPay = " + totalEmpPay);
+            totalEmpPay = employee.getEmpPay() + totalEmpPay;
         }
         employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getWorkDate(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
     }
