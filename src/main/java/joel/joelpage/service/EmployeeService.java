@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -92,8 +93,14 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(dto.getId()).get();
         int plusWorkCount = 0;
         int totalEmpPay = 0;
+        LocalTime startTime;
         if (employee.getWorkDate() != dto.getOffTime()) {
-            Duration difference = Duration.between((dto.getStartWorkTime()).toLocalTime(), (dto.getOffTime()).toLocalTime());
+            if (dto.getStartWorkTime() == null){
+                startTime = employee.getWorkDate().toLocalTime();
+            }else {
+                startTime = dto.getStartWorkTime().toLocalTime();
+            }
+            Duration difference = Duration.between(startTime, (dto.getOffTime()).toLocalTime());
             plusWorkCount = employee.getEmpWorkCount() + 1;
             int diffWorkTime = ((int) difference.getSeconds() / 3600);
             totalEmpPay = diffWorkTime * payPerHour;
