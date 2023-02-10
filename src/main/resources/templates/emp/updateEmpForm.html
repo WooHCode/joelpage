@@ -38,8 +38,12 @@
                    placeholder="이메일을 입력하세요">
         </div>
         <div class="form-group">
-            <label th:for="workDate">출근날짜</label>
-            <input type="datetime-local" th:field="*{workDate}" class="form-control">
+            <label th:for="startWorkTime">출근시각</label>
+            <input type="datetime-local" th:field="*{startWorkTime}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label th:for="offTime">퇴근시각</label>
+            <input type="datetime-local" th:field="*{offTime}" class="form-control">
         </div>
         <div class="form-group">
             <label th:for="empWorkCount">직원출근횟수</label>

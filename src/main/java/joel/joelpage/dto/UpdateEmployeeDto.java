@@ -16,7 +16,9 @@ public class UpdateEmployeeDto {
     private String empName;
     private String empPhone;
     private String empEmail;
-    private LocalDateTime workDate;
+
+    private LocalDateTime offTime;
+    private LocalDateTime startWorkTime;
     private EmpGender empGender;
     private int empWorkCount;
     private int empPay;
@@ -28,12 +30,13 @@ public class UpdateEmployeeDto {
     }
 
     @Builder
-    public UpdateEmployeeDto(Long id, String empName, EmpGender gender, String empPhone, String empEmail, LocalDateTime workDate, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public UpdateEmployeeDto(Long id, String empName, EmpGender gender, String empPhone, String empEmail, LocalDateTime startWorkTime, LocalDateTime offTime, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
         this.empPhone = empPhone;
         this.empEmail = empEmail;
-        this.workDate = workDate;
+        this.startWorkTime = startWorkTime;
+        this.offTime = offTime;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;

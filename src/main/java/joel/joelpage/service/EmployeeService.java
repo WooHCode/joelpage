@@ -65,7 +65,7 @@ public class EmployeeService {
                 .empAge(employee.getEmpAge())
                 .empEmail(employee.getEmpEmail())
                 .empPhone(employee.getEmpPhone())
-                .workDate(employee.getWorkDate())
+                .startWorkTime(employee.getWorkDate())
                 .empDescription(employee.getEmpDescription())
                 .empName(employee.getEmpName())
                 .gender(employee.getEmpGender())
@@ -85,21 +85,21 @@ public class EmployeeService {
 
     /**
      * 직원 데이터 Object로 가져와서 전체 데이터 수정
-     * 기존 직원데이터에 출근날짜와 dto에서 받아온 직원 날짜가 다르면(출근했다면) workCount를 1 올려서 update한다.
+     *
      */
     @Transactional
     public void updateEmp(UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(dto.getId()).get();
         int plusWorkCount = 0;
         int totalEmpPay = 0;
-        if (employee.getWorkDate() != dto.getWorkDate()) if (employee.getWorkDate() != null) {
-            Duration difference = Duration.between((employee.getWorkDate()).toLocalTime(), (dto.getWorkDate()).toLocalTime());
+        if (employee.getWorkDate() != dto.getOffTime()) {
+            Duration difference = Duration.between((dto.getStartWorkTime()).toLocalTime(), (dto.getOffTime()).toLocalTime());
             plusWorkCount = employee.getEmpWorkCount() + 1;
             int diffWorkTime = ((int) difference.getSeconds() / 3600);
             totalEmpPay = diffWorkTime * payPerHour;
             totalEmpPay = employee.getEmpPay() + totalEmpPay;
         }
-        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getWorkDate(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
+        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
     }
 
     /**
