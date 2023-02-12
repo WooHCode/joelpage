@@ -87,6 +87,12 @@ public class EmpApiController {
         return HttpStatus.OK;
     }
 
+    @PutMapping("/empDetail/api/v1/emp/update/{empId}")
+    public HttpStatus updateEmpDetail(@PathVariable("empId") Long id, @RequestBody UpdateEmployeeDto dto) {
+        employeeService.updateEmpById(id, dto);
+        return HttpStatus.OK;
+    }
+
     @DeleteMapping("/api/v1/emp/delete/{empId}")
     public HttpStatus deleteEmp(@PathVariable("empId") Long id) {
         employeeService.deleteEmp(id);

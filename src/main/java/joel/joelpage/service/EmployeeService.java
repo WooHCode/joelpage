@@ -14,6 +14,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -111,6 +112,17 @@ public class EmployeeService {
             totalEmpPay = employee.getEmpPay() + totalEmpPay;
         }
         employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
+    }
+
+    /**
+     * 직원 1명의 정보를 id값으로 가져온 후, dto로 받아온 데이터로 db데이터 수정
+     * @param id
+     * @param dto
+     */
+    @Transactional
+    public void updateEmpById(Long id, UpdateEmployeeDto dto) {
+        Employee findEmp = employeeRepository.findById(id).get();
+        findEmp.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getOffTime(),dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
     }
 
     /**
