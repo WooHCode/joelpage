@@ -87,8 +87,8 @@ public class EmployeeService {
      */
     @Transactional
     public Long saveEmp(EmpDto dto) {
-        Employee newEmp = new Employee(dto.getId(),dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),
-                dto.getGender(),false,dto.getWorkCount(),dto.getPay(),dto.getAge(),dto.getEmpDesc());
+        Employee newEmp = new Employee(dto.getId(), dto.getName(), dto.getPhone(), dto.getEmail(), dto.getEnterDate(), dto.getWorkDate(),
+                dto.getGender(), false, dto.getWorkCount(), dto.getPay(), dto.getAge(), dto.getEmpDesc());
         Employee savedEmp = employeeRepository.save(newEmp);
         return savedEmp.getId();
     }
@@ -100,34 +100,30 @@ public class EmployeeService {
     @Transactional
     public void updateEmp(UpdateEmployeeDto dto) {
         Employee employee = employeeRepository.findById(dto.getId()).get();
-        int plusWorkCount = 0;
-        int totalEmpPay = 0;
-        LocalTime startTime;
-        if (employee.getWorkDate() != dto.getOffTime()) {
-            if (dto.getStartWorkTime() == null){
-                startTime = employee.getWorkDate().toLocalTime();
-            }else {
-                startTime = dto.getStartWorkTime().toLocalTime();
-            }
-            Duration difference = Duration.between(startTime, (dto.getOffTime()).toLocalTime());
-            plusWorkCount = employee.getEmpWorkCount() + 1;
-            int diffWorkTime = ((int) difference.getSeconds() / 3600);
-            totalEmpPay = diffWorkTime * payPerHour;
-            totalEmpPay = employee.getEmpPay() + totalEmpPay;
-        }
-        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(),dto.getEmpEnterDate(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
+        int plusWorkCount;
+        int totalEmpPay;
+        Duration difference = workTimeDifference(employee, dto);
+        plusWorkCount = employee.getEmpWorkCount() + 1;
+        int diffWorkTime = ((int) difference.getSeconds() / 3600);
+        if (diffWorkTime < 0) diffWorkTime += 24;
+        System.out.println("diff = " + (int) difference.getSeconds());
+        System.out.println("diffWorkTime = " + diffWorkTime);
+        totalEmpPay = diffWorkTime * payPerHour;
+        totalEmpPay = employee.getEmpPay() + totalEmpPay;
+        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getEmpEnterDate(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
     }
 
     /**
      * 직원 1명의 정보를 id값으로 가져온 후, dto로 받아온 데이터로 db데이터 수정
      * 리턴값 없음
+     *
      * @param id
      * @param dto
      */
     @Transactional
     public void updateEmpById(Long id, UpdateEmployeeDto dto) {
         Employee findEmp = employeeRepository.findById(id).get();
-        findEmp.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getEmpEnterDate(),dto.getOffTime(),dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
+        findEmp.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getEmpEnterDate(), dto.getOffTime(), dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(), dto.getEmpDescription());
     }
 
     /**
@@ -148,5 +144,20 @@ public class EmployeeService {
 
     }
 
+    static Duration workTimeDifference(Employee employee, UpdateEmployeeDto dto) {
+        LocalTime startTime;
+        startTime = getStartTime(employee, dto);
+        Duration difference = Duration.between(startTime, (dto.getOffTime()).toLocalTime());
+        return difference;
+    }
 
+    private static LocalTime getStartTime(Employee employee, UpdateEmployeeDto dto) {
+        LocalTime startTime;
+        if (employee.getWorkDate() != dto.getOffTime() && dto.getStartWorkTime() == null) {
+            startTime = employee.getWorkDate().toLocalTime();
+        } else {
+            startTime = dto.getStartWorkTime().toLocalTime();
+        }
+        return startTime;
+    }
 }
