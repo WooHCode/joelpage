@@ -105,6 +105,7 @@ public class EmployeeService {
         Duration difference = workTimeDifference(employee, dto);
         plusWorkCount = employee.getEmpWorkCount() + 1;
         int diffWorkTime = ((int) difference.getSeconds() / 3600);
+        // 하루가 지났다면 -24시간이 되어있기때문에 정확한 데이터를 위해 +24를 해주면 그 차이가 나온다.
         if (diffWorkTime < 0) diffWorkTime += 24;
         System.out.println("diff = " + (int) difference.getSeconds());
         System.out.println("diffWorkTime = " + diffWorkTime);
