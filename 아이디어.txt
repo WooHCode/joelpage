@@ -49,3 +49,4 @@ issue
 - ddl-auto update를 하면 id 값이 점프한다! none으로 설정하면 정상적으로 1부터 1씩
 
 - LocalDateTime 시간 비교 시 duration을 사용해서 비교를 하게되면 1일이 지났을 때 차이 값이 -가된다.
+  * 해결: difference.getSeconds()/3600 의 값이 - 로 나온다면 +24를 더해서 하루가 지났다는것을 인지시켜준다.
