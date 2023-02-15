@@ -31,9 +31,7 @@ public class EmpController {
 
     @PostMapping("/emp/new")
     public String empCreateForm(EmpDto dto) {
-        Employee employee = new Employee();
-        employee.toEntity(dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),dto.getGender(),0,dto.getPay(),dto.getAge(), dto.getEmpDesc());
-        employeeService.saveEmp(employee);
+        employeeService.saveEmp(dto);
         return "redirect:/home";
     }
     //한건 삭제

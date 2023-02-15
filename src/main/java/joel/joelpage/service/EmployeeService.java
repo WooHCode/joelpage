@@ -1,5 +1,6 @@
 package joel.joelpage.service;
 
+import joel.joelpage.dto.EmpDto;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
@@ -85,8 +86,11 @@ public class EmployeeService {
      * 직원 데이터 한 건 저장
      */
     @Transactional
-    public Long saveEmp(Employee employee) {
-        Employee savedEmp = employeeRepository.save(employee);
+    public Long saveEmp(EmpDto dto) {
+        Employee newEmp = null;
+        newEmp.toEntity(dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),
+                dto.getGender(),dto.getWorkCount(),dto.getPay(),dto.getAge(),dto.getEmpDesc());
+        Employee savedEmp = employeeRepository.save(newEmp);
         return savedEmp.getId();
     }
 

@@ -75,8 +75,8 @@ public class EmpApiController {
     }
 
     @PostMapping("/api/v1/emp/save")
-    public CreateEmpResponse saveEmp(@RequestBody Employee employee) {
-        Long id = employeeService.saveEmp(employee);
+    public CreateEmpResponse saveEmp(@RequestBody EmpDto dto) {
+        Long id = employeeService.saveEmp(dto);
         return new CreateEmpResponse(id);
     }
 
