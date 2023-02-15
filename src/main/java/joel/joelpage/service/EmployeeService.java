@@ -70,11 +70,12 @@ public class EmployeeService {
                 .id(employee.getId())
                 .empAge(employee.getEmpAge())
                 .empEmail(employee.getEmpEmail())
+                .empEnterDate(employee.getEnterDate())
                 .empPhone(employee.getEmpPhone())
                 .startWorkTime(employee.getWorkDate())
                 .empDescription(employee.getEmpDescription())
                 .empName(employee.getEmpName())
-                .gender(employee.getEmpGender())
+                .empGender(employee.getEmpGender())
                 .empPay(employee.getEmpPay())
                 .empWorkCount(employee.getEmpWorkCount())
                 .build();
@@ -111,7 +112,7 @@ public class EmployeeService {
             totalEmpPay = diffWorkTime * payPerHour;
             totalEmpPay = employee.getEmpPay() + totalEmpPay;
         }
-        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
+        employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(),dto.getEmpEnterDate(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());
     }
 
     /**
@@ -123,7 +124,7 @@ public class EmployeeService {
     @Transactional
     public void updateEmpById(Long id, UpdateEmployeeDto dto) {
         Employee findEmp = employeeRepository.findById(id).get();
-        findEmp.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getOffTime(),dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
+        findEmp.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getEmpEnterDate(),dto.getOffTime(),dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
     }
 
     /**

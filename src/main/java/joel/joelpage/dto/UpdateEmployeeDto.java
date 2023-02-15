@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,6 +17,8 @@ public class UpdateEmployeeDto {
     private String empName;
     private String empPhone;
     private String empEmail;
+
+    private LocalDate empEnterDate;
 
     private LocalDateTime offTime;
     private LocalDateTime startWorkTime;
@@ -30,14 +33,15 @@ public class UpdateEmployeeDto {
     }
 
     @Builder
-    public UpdateEmployeeDto(Long id, String empName, EmpGender gender, String empPhone, String empEmail, LocalDateTime startWorkTime, LocalDateTime offTime, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public UpdateEmployeeDto(Long id, String empName, String empPhone, String empEmail, LocalDate empEnterDate, LocalDateTime offTime, LocalDateTime startWorkTime, EmpGender empGender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
         this.empPhone = empPhone;
         this.empEmail = empEmail;
-        this.startWorkTime = startWorkTime;
+        this.empEnterDate = empEnterDate;
         this.offTime = offTime;
-        this.empGender = gender;
+        this.startWorkTime = startWorkTime;
+        this.empGender = empGender;
         this.empWorkCount = empWorkCount;
         this.empPay = empPay;
         this.empAge = empAge;

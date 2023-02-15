@@ -83,7 +83,7 @@ public class EmpApiController {
     @PatchMapping("/api/v1/emp/update/{empId}")
     public HttpStatus updateEmp(@PathVariable("empId") Long id, @RequestBody UpdateEmployeeDto dto) {
         Employee findEmp = employeeService.findOneEmp(id);
-        findEmp.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getOffTime(),dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
+        findEmp.toEntity(dto.getEmpName(),dto.getEmpPhone(),dto.getEmpEmail(),dto.getEmpEnterDate(),dto.getOffTime(),dto.getEmpGender(), dto.getEmpWorkCount(), dto.getEmpPay(), dto.getEmpAge(),dto.getEmpDescription());
         return HttpStatus.OK;
     }
 

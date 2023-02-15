@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,6 +16,7 @@ public class EmpDto {
     private String name;
     private String email;
     private String phone;
+    private LocalDate enterDate;
     private LocalDateTime workDate;
     @Enumerated
     private EmpGender gender;

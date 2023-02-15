@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +24,9 @@ public class Employee extends BaseTime {
 
     @Column(name = "emp_email")
     private String empEmail;
+
+    @Column(name = "emp_enter")
+    private LocalDate enterDate;
 
     @Column(name = "work_date")
     private LocalDateTime workDate;
@@ -45,11 +49,12 @@ public class Employee extends BaseTime {
     @Column(name = "emp_description")
     private String empDescription;
 
-    public Employee(Long id, String empName, String empPhone, String empEmail, LocalDateTime workDate, EmpGender empGender, boolean isWorked, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public Employee(Long id, String empName, String empPhone, String empEmail, LocalDate enterDate, LocalDateTime workDate, EmpGender empGender, boolean isWorked, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
         this.empPhone = empPhone;
         this.empEmail = empEmail;
+        this.enterDate = enterDate;
         this.workDate = workDate;
         this.empGender = empGender;
         this.isWorked = isWorked;
@@ -59,10 +64,11 @@ public class Employee extends BaseTime {
         this.empDescription = empDescription;
     }
 
-    public void toEntity(String empName, String empPhone, String empEmail, LocalDateTime workDate, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
+    public void toEntity(String empName, String empPhone, String empEmail, LocalDate enterDate, LocalDateTime workDate, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.empName = empName;
         this.empPhone = empPhone;
         this.empEmail = empEmail;
+        this.enterDate = enterDate;
         this.workDate = workDate;
         this.empGender = gender;
         this.empWorkCount = empWorkCount;
