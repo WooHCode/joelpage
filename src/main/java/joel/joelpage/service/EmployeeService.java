@@ -87,9 +87,8 @@ public class EmployeeService {
      */
     @Transactional
     public Long saveEmp(EmpDto dto) {
-        Employee newEmp = null;
-        newEmp.toEntity(dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),
-                dto.getGender(),dto.getWorkCount(),dto.getPay(),dto.getAge(),dto.getEmpDesc());
+        Employee newEmp = new Employee(dto.getId(),dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),
+                dto.getGender(),false,dto.getWorkCount(),dto.getPay(),dto.getAge(),dto.getEmpDesc());
         Employee savedEmp = employeeRepository.save(newEmp);
         return savedEmp.getId();
     }
