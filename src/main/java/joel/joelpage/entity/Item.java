@@ -26,6 +26,8 @@ public class Item {
     @Column(name = "item_description")
     private String itemDes;
 
+    private int saleCount;
+
     @Enumerated(EnumType.STRING)
     private ItemCode itemCode;
 
