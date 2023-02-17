@@ -27,6 +27,7 @@ public class Item {
     private String itemDes;
 
     private int saleCount;
+    private int itemTotalSale;
 
     @Enumerated(EnumType.STRING)
     private ItemCode itemCode;
