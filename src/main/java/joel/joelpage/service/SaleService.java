@@ -1,5 +1,6 @@
 package joel.joelpage.service;
 
+import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,9 @@ public class SaleService {
 
     public Sale findOneSaleByDate() {
         return null;
+    }
+    public List<Sale> findSaleByItemCode(ItemCode itemCode) {
+        return saleRepository.findByItemCode(itemCode);
     }
 
     @Transactional
