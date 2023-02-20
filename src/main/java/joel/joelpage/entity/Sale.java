@@ -22,6 +22,10 @@ public class Sale {
     @Column(name = "s_item_price")
     private String saleItemPrice;
 
+    @Column(name = "s_item_code")
+    @Enumerated(EnumType.STRING)
+    private ItemCode saleItemCode;
+
     @Column(name = "sale_date")
     private LocalDate saleDate;
 
@@ -32,10 +36,11 @@ public class Sale {
     private int itemTotalSale;
 
     @Builder
-    public Sale(Long id, String saleItemName, String saleItemPrice, LocalDate saleDate, int saleCount, int itemTotalSale) {
+    public Sale(Long id, String saleItemName, String saleItemPrice, ItemCode saleItemCode, LocalDate saleDate, int saleCount, int itemTotalSale) {
         this.id = id;
         this.saleItemName = saleItemName;
         this.saleItemPrice = saleItemPrice;
+        this.saleItemCode = saleItemCode;
         this.saleDate = saleDate;
         this.saleCount = saleCount;
         this.itemTotalSale = itemTotalSale;

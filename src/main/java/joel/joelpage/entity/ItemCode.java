@@ -1,5 +1,5 @@
 package joel.joelpage.entity;
 
 public enum ItemCode {
-    MILK, WHITE, BLACK, ADE ,TEA, B_TEA, SANDWICH, SMOOTHIE
+    CROFFLE, TOAST, SCONE, BASAK, COFFEE, LATTE, NON_COFFEE, ONE_LITER, B_TEA, ADE, TEA
 }
