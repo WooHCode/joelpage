@@ -31,7 +31,6 @@ public class SaleDto {
     private int itemTotalSale;
 
     @Builder
-
     public SaleDto(Long id, String saleItemName, int saleItemPrice, LocalDate saleDate, ItemCode saleItemCode, int saleCount, int itemTotalSale) {
         this.id = id;
         this.saleItemName = saleItemName;

@@ -23,7 +23,7 @@ public class SaleService {
         return null;
     }
     public List<Sale> findSaleByItemCode(ItemCode itemCode) {
-        return saleRepository.findByItemCode(itemCode);
+        return saleRepository.findBySaleItemCode(itemCode);
     }
 
     @Transactional
