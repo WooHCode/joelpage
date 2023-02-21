@@ -28,6 +28,15 @@
             <input type="number" th:field="*{saleCount}" class="form-control"
                    placeholder="가격을 입력하세요">
         </div>
+        <div class="form-group">
+            <label th:for="saleItemCode">아이템 코드</label>
+            <select th:field="*{saleItemCode}">
+                <option th:each="saleItemCode : ${T(joel.joelpage.entity.ItemCode).values()}"
+                        th:value="${saleItemCode}"
+                        th:text="${saleItemCode}">
+                </option>
+            </select>
+        </div>
          <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
