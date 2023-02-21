@@ -22,6 +22,10 @@ public class SaleService {
     public Sale findOneSaleByDate() {
         return null;
     }
+
+    public Sale findOneSaleById(Long id) {
+        return saleRepository.findById(id).get();
+    }
     public List<Sale> findSaleByItemCode(ItemCode itemCode) {
         return saleRepository.findBySaleItemCode(itemCode);
     }
