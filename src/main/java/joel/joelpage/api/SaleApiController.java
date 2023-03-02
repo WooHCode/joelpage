@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,16 +19,15 @@ public class SaleApiController {
     @GetMapping("/api/v1/sale")
     public List<SaleDto> getAllSales() {
         List<Sale> allSales = saleService.findAllSales();
-        List<SaleDto> saleDto = allSales.stream().map(s ->
+        return allSales.stream().map(s ->
                 new SaleDto(s.getId(), s.getSaleItemName(), s.getSaleItemPrice(), s.getSaleDate(),
                         s.getSaleItemCode(), s.getSaleCount(), s.getItemTotalSale())).collect(Collectors.toList());
-        return saleDto;
     }
 
     @GetMapping("/api/v1/sale/{id}")
     public SaleDto getOneSale(@PathVariable(value = "id") Long id) {
         Sale sale = saleService.findOneSaleById(id);
-        SaleDto saleDto = SaleDto.builder()
+        return SaleDto.builder()
                 .id(sale.getId())
                 .saleDate(sale.getSaleDate())
                 .saleCount(sale.getSaleCount())
@@ -38,6 +36,5 @@ public class SaleApiController {
                 .saleItemCode(sale.getSaleItemCode())
                 .saleItemName(sale.getSaleItemName())
                 .build();
-        return saleDto;
     }
 }
