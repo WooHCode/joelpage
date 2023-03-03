@@ -1,7 +1,7 @@
 package joel.joelpage.service;
 
+
 import joel.joelpage.dto.UpdateSaleDto;
-import joel.joelpage.dto.WeekSaleDto;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.repository.SaleRepository;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -50,11 +50,13 @@ public class SaleService {
                 insertDate = sale.getSaleDate();
                 totalCount += oneCount;
             }
+            if (insertDate == null){
+                insertDate = LocalDate.now();
+            }
             resultMap.put(insertDate, totalCount);
             insertDate = null;
             totalCount = 0;
         }
-
         return resultMap;
     }
 
