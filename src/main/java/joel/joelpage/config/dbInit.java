@@ -3,14 +3,18 @@ package joel.joelpage.config;
 import jakarta.annotation.PostConstruct;
 import joel.joelpage.dto.EmpDto;
 import joel.joelpage.dto.UpdateItemDto;
+import joel.joelpage.dto.UpdateSaleDto;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.entity.ItemCode;
+import joel.joelpage.entity.Sale;
 import joel.joelpage.service.EmployeeService;
 import joel.joelpage.service.ItemService;
+import joel.joelpage.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Configuration
@@ -19,6 +23,8 @@ public class dbInit {
 
     private final EmployeeService employeeService;
     private final ItemService itemService;
+
+    private final SaleService saleService;
 
     @PostConstruct
     public void init() {
@@ -43,6 +49,17 @@ public class dbInit {
                     .itemDes("상품설명"+i)
                     .build();
             itemService.saveItemByDto(dto);
+        }
+        for (int i = 0; i < 8; i++) {
+            UpdateSaleDto dto = UpdateSaleDto.builder()
+                    .saleItemName("아메리카노" + i)
+                    .saleItemCode(ItemCode.COFFEE)
+                    .saleDate(LocalDate.now().minusDays(i))
+                    .saleCount(25)
+                    .itemTotalSale(300)
+                    .saleItemPrice(2500)
+                    .build();
+            saleService.saveOneSaleByDto(dto);
         }
     }
 }
