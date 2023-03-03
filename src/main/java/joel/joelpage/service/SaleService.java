@@ -44,15 +44,16 @@ public class SaleService {
 
             List<Sale> nowData = allBySaleDateBetween.stream()
                     .filter(n -> n.getSaleDate().isEqual(LocalDate.now().minusDays(minusDate))).toList();
-
-            for (Sale sale : nowData) {
-                int oneCount = sale.getSaleCount() * sale.getSaleItemPrice();
-                insertDate = sale.getSaleDate();
-                totalCount += oneCount;
-            }
-            if (insertDate == null){
+            if (nowData.size() == 0){
                 insertDate = LocalDate.now();
-            }
+                totalCount = 0;
+            }else{
+            for (Sale sale : nowData) {
+                    int oneCount = sale.getSaleCount() * sale.getSaleItemPrice();
+                    insertDate = sale.getSaleDate();
+                    totalCount += oneCount;
+
+            }}
             resultMap.put(insertDate, totalCount);
             insertDate = null;
             totalCount = 0;
