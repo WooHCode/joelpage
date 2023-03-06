@@ -6,6 +6,7 @@ import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,11 +32,12 @@ public class SaleService {
         return saleRepository.findById(id).get();
     }
 
-    public Map<String,Integer> findAllByMonth(LocalDate nowDate) {
+    public Map<String,Integer> findAllByMonth() {
         HashMap<String, Integer> resultMap = new HashMap<>();
+        LocalDate startDate = LocalDate.now().withMonth(1).withDayOfMonth(1); // 올해의 1월 1일
+        LocalDate endDate = startDate.plusYears(1); // 올해의 12월 31일
 
-        String year = String.valueOf(nowDate.getYear());
-        List<Sale> saleList = saleRepository.findAllBySaleDateLike(year);
+        List<Sale> saleList = saleRepository.findAllBySaleDateBetween(startDate,endDate);
 
         for (int i=1; i<13; i++){
             String finalI = String.valueOf(i);
@@ -60,7 +62,7 @@ public class SaleService {
         HashMap<LocalDate, Integer> resultMap = new HashMap<>();
         LocalDate startDate = LocalDate.now().minusDays(7);
         LocalDate endDate = LocalDate.now();
-        List<Sale> allBySaleDateBetween = saleRepository.findAllBySaleDateBetween(startDate, endDate);
+        List<Sale> allBySaleDateBetween = saleRepository.findBySaleDateBetween(startDate, endDate);
 
         for (int i = 0; i < 8; i++) {
             int minusDate = i;

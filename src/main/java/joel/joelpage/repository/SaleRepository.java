@@ -13,7 +13,8 @@ import java.util.List;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long> {
     List<Sale> findBySaleItemCode(ItemCode itemCode);
-    List<Sale> findAllBySaleDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Sale> findBySaleDateBetween(LocalDate startDate, LocalDate endDate);
 
-    List<Sale> findAllBySaleDateLike(String nowYear);
+    @Query("SELECT s FROM Sale s WHERE s.saleDate >= :startDate AND s.saleDate < :endDate")
+    List<Sale> findAllBySaleDateBetween(LocalDate startDate, LocalDate endDate);
 }

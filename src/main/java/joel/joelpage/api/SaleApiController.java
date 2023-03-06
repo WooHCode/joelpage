@@ -32,9 +32,9 @@ public class SaleApiController {
     public Map<LocalDate, Integer> getWeeklySale() {
         return saleService.findAllByWeekDate();
     }
-    @GetMapping("/api/v1/sales/{nowYear}")
-    public Map<String,Integer> getMonthlySale(@PathVariable(value = "nowYear")LocalDate nowYear) {
-        return saleService.findAllByMonth(nowYear);
+    @GetMapping("/api/v2/sales/")
+    public Map<String,Integer> getMonthlySale() {
+        return saleService.findAllByMonth();
     }
 
 
