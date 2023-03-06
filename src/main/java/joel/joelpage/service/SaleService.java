@@ -31,6 +31,31 @@ public class SaleService {
         return saleRepository.findById(id).get();
     }
 
+    public Map<String,Integer> findAllByMonth(LocalDate nowDate) {
+        HashMap<String, Integer> resultMap = new HashMap<>();
+
+        String year = String.valueOf(nowDate.getYear());
+        List<Sale> saleList = saleRepository.findAllBySaleDateLike(year);
+
+        for (int i=1; i<13; i++){
+            String finalI = String.valueOf(i);
+            int insertValue = 0;
+            List<Sale> collect = saleList.stream().filter(s -> String.valueOf(s.getSaleDate()).startsWith("2023-0" + finalI)).toList();
+
+            if (collect.size() == 0){
+                insertValue = 0;
+            } else {
+                for (Sale sale : collect) {
+                    int dailySale = sale.getSaleCount() * sale.getSaleItemPrice();
+                    insertValue += dailySale;
+                }
+            }
+            resultMap.put("2023-0"+finalI,insertValue);
+            insertValue = 0;
+        }
+        return resultMap;
+    }
+
     public Map<LocalDate,Integer> findAllByWeekDate() {
         HashMap<LocalDate, Integer> resultMap = new HashMap<>();
         LocalDate startDate = LocalDate.now().minusDays(7);
