@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -32,19 +33,19 @@ public class SaleService {
         return saleRepository.findById(id).get();
     }
 
-    public Map<String,Integer> findAllByMonth() {
+    public Map<String, Integer> findAllByMonth() {
         HashMap<String, Integer> resultMap = new HashMap<>();
         LocalDate startDate = LocalDate.now().withMonth(1).withDayOfMonth(1); // 올해의 1월 1일
         LocalDate endDate = startDate.plusYears(1); // 올해의 12월 31일
 
-        List<Sale> saleList = saleRepository.findAllBySaleDateBetween(startDate,endDate);
+        List<Sale> saleList = saleRepository.findAllBySaleDateBetween(startDate, endDate);
 
-        for (int i=1; i<13; i++){
+        for (int i = 1; i < 13; i++) {
             String finalI = String.valueOf(i);
             int insertValue = 0;
             List<Sale> collect = saleList.stream().filter(s -> String.valueOf(s.getSaleDate()).startsWith("2023-0" + finalI)).toList();
 
-            if (collect.size() == 0){
+            if (collect.size() == 0) {
                 insertValue = 0;
             } else {
                 for (Sale sale : collect) {
@@ -52,13 +53,13 @@ public class SaleService {
                     insertValue += dailySale;
                 }
             }
-            resultMap.put("2023-0"+finalI,insertValue);
+            resultMap.put("2023-0" + finalI, insertValue);
             insertValue = 0;
         }
         return resultMap;
     }
 
-    public Map<LocalDate,Integer> findAllByWeekDate() {
+    public Map<LocalDate, Integer> findAllByWeekDate() {
         HashMap<LocalDate, Integer> resultMap = new HashMap<>();
         LocalDate startDate = LocalDate.now().minusDays(7);
         LocalDate endDate = LocalDate.now();
@@ -71,16 +72,17 @@ public class SaleService {
 
             List<Sale> nowData = allBySaleDateBetween.stream()
                     .filter(n -> n.getSaleDate().isEqual(LocalDate.now().minusDays(minusDate))).toList();
-            if (nowData.size() == 0){
+            if (nowData.size() == 0) {
                 insertDate = LocalDate.now();
                 totalCount = 0;
-            }else{
-            for (Sale sale : nowData) {
+            } else {
+                for (Sale sale : nowData) {
                     int oneCount = sale.getSaleCount() * sale.getSaleItemPrice();
                     insertDate = sale.getSaleDate();
                     totalCount += oneCount;
 
-            }}
+                }
+            }
             resultMap.put(insertDate, totalCount);
             insertDate = null;
             totalCount = 0;
@@ -88,8 +90,28 @@ public class SaleService {
         return resultMap;
     }
 
-    public List<Sale> findSaleByItemCode(ItemCode itemCode) {
-        return saleRepository.findBySaleItemCode(itemCode);
+    public Map<String,Integer> findSaleByItemCode(ItemCode itemCode) {
+        HashMap<String, Integer> resultMap = new HashMap<>();
+        String initItem;
+        int initValue;
+
+        List<Sale> saleList = saleRepository.findBySaleItemCode(itemCode);
+        int year = LocalDate.now().getYear();
+        int monthValue = LocalDate.now().getMonthValue();
+
+        List<Sale> collect = saleList.stream()
+                .filter(s -> s.getSaleDate().getYear() == year && s.getSaleDate().getMonthValue() == monthValue).toList();
+
+        for (Sale sale : collect) {
+           initItem = sale.getSaleItemName();
+           initValue = sale.getSaleCount() * sale.getSaleItemPrice();
+
+            if (resultMap.containsKey(sale.getSaleItemName())) {
+                initValue += resultMap.get(initItem);
+            }
+            resultMap.put(initItem,initValue);
+        }
+        return resultMap;
     }
 
     @Transactional
