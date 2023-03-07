@@ -2,6 +2,7 @@ package joel.joelpage.api;
 
 import joel.joelpage.dto.SaleDto;
 import joel.joelpage.dto.WeekSaleDto;
+import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.service.SaleService;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +33,16 @@ public class SaleApiController {
     public Map<LocalDate, Integer> getWeeklySale() {
         return saleService.findAllByWeekDate();
     }
-    @GetMapping("/api/v2/sales/")
+    @GetMapping("/api/v2/sales")
     public Map<String,Integer> getMonthlySale() {
         return saleService.findAllByMonth();
     }
+
+    @GetMapping("/api/v2/sales/{itemCode}")
+    public Map<String,Integer> getSaleByItemCode(@PathVariable(value = "itemCode") ItemCode itemCode) {
+       return saleService.findSaleByItemCode(itemCode);
+    }
+
 
 
     @GetMapping("/api/v1/sale/{id}")
