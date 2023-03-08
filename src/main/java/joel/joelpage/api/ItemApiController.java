@@ -99,6 +99,8 @@ public class ItemApiController {
         return resultList;
     }
 
+    //TODO 상품코드로 검색구현
+
     //상품저장
     @PostMapping("/api/v1/items")
     public CreateItemResponse saveItemV1(@RequestBody Item item) {
