@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 public class dbInit {
 
     private final EmployeeService employeeService;
-    private final ItemService itemService;
 
     private final SaleService saleService;
 
@@ -37,16 +36,6 @@ public class dbInit {
                     .empDesc("상세설명"+i)
                     .build();
             employeeService.saveEmp(dto);
-        }
-        for (int i = 0; i < 8; i++) {
-            UpdateItemDto dto = UpdateItemDto.builder()
-                    .itemName("상품"+i)
-                    .price(1500)
-                    .itemCode(ItemCode.ADE)
-                    .imgPath("/img/result.jpg")
-                    .itemDes("상품설명"+i)
-                    .build();
-            itemService.saveItemByDto(dto);
         }
         for (int i = 1; i < 8; i++) {
             UpdateSaleDto dto = UpdateSaleDto.builder()
