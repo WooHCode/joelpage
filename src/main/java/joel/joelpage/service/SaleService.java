@@ -1,18 +1,17 @@
 package joel.joelpage.service;
 
 
+import joel.joelpage.dto.SaveSaleDto;
 import joel.joelpage.dto.UpdateSaleDto;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -131,6 +130,19 @@ public class SaleService {
                 .build();
         saleRepository.save(sale);
     }
+    @Transactional
+    public void saveListSale(List<SaveSaleDto> dto) {
+        for (SaveSaleDto saleDto:dto) {
+            Sale sale = Sale.builder()
+                    .saleItemPrice(saleDto.getItemPrice())
+                    .saleCount(saleDto.getItemCount())
+                    .saleDate(saleDto.getSaleDate())
+                    .saleItemCode(saleDto.getItemCode())
+                    .saleItemName(saleDto.getItemName())
+                    .build();
+            saleRepository.save(sale);
+        }
+    }
 
     @Transactional
     public void updateOneSale(Long id, Sale sale) {
@@ -143,4 +155,6 @@ public class SaleService {
         Sale sale = saleRepository.findById(id).get();
         saleRepository.delete(sale);
     }
+
+
 }
