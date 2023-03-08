@@ -1,5 +1,6 @@
 package joel.joelpage.api;
 
+import joel.joelpage.dto.SaleItemDto;
 import joel.joelpage.dto.UpdateItemDto;
 import joel.joelpage.entity.Item;
 import joel.joelpage.entity.ItemCode;
@@ -35,8 +36,15 @@ public class ItemApiController {
                 .collect(Collectors.toList());
         return new Result(collect);
     }
+
+    @GetMapping("/api/v1/saleItems")
+    public List<SaleItemDto> getAllSaleItems() {
+        List<Item> allItems = itemService.findAllItems();
+        return allItems.stream().map(item -> new SaleItemDto(item.getName(),item.getPrice(),item.getItemCode())).collect(Collectors.toList());
+    }
+
     //엔티티 스펙을 노출한 상품 한건 조회
-    @GetMapping("api/v1/items/{itemId}")
+    @GetMapping("/api/v1/items/{itemId}")
     public Item findOneItem(@PathVariable("itemId") Long id) {
         return itemService.findOneItem(id);
     }

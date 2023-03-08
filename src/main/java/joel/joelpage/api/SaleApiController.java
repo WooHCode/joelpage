@@ -1,15 +1,14 @@
 package joel.joelpage.api;
 
 import joel.joelpage.dto.SaleDto;
+import joel.joelpage.dto.SaveSaleDto;
 import joel.joelpage.dto.WeekSaleDto;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cglib.core.Local;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,8 +42,6 @@ public class SaleApiController {
        return saleService.findSaleByItemCode(itemCode);
     }
 
-
-
     @GetMapping("/api/v1/sale/{id}")
     public SaleDto getOneSale(@PathVariable(value = "id") Long id) {
         Sale sale = saleService.findOneSaleById(id);
@@ -58,4 +55,9 @@ public class SaleApiController {
                 .saleItemName(sale.getSaleItemName())
                 .build();
     }
+    @PostMapping("/api/v1/sales")
+    public void saveSales(@RequestBody List<SaveSaleDto> dto) {
+        saleService.saveListSale(dto);
+    }
+
 }
