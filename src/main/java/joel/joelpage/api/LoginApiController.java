@@ -3,9 +3,11 @@ package joel.joelpage.api;
 import joel.joelpage.entity.LoginMember;
 import joel.joelpage.repository.LoginRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
@@ -22,6 +24,6 @@ public class LoginApiController {
         if (loginMember != null) {
             return loginMember.getSeq();
         }
-        return 0l;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 }
