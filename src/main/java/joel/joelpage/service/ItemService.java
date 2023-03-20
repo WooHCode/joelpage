@@ -1,7 +1,9 @@
 package joel.joelpage.service;
 
+import joel.joelpage.dto.ItemDto;
 import joel.joelpage.dto.UpdateItemDto;
 import joel.joelpage.entity.Item;
+import joel.joelpage.entity.ItemCode;
 import joel.joelpage.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,11 @@ public class ItemService {
     public Page<Item> findAllItemPages(Pageable pageable) {
         Page<Item> items = itemRepository.findAll(pageable).map(item -> item);
         return items;
+    }
+
+    public Page<ItemDto> findAllItemsByItemCodePages(ItemCode itemCode, Pageable pageable) {
+        Page<Item> list = itemRepository.findListByItemCode(itemCode, pageable);
+        return list.map(l -> new ItemDto(l.getName(),l.getPrice(), l.getImgPath(),l.getItemDes(), l.getItemCode()));
     }
 
     /**

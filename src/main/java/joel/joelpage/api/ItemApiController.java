@@ -100,6 +100,11 @@ public class ItemApiController {
     }
 
     //TODO 상품코드로 검색구현
+    @GetMapping("/api/v4/items/{itemCode}")
+    public Page<joel.joelpage.dto.ItemDto> itemResponseByItemCode(@PathVariable(value = "itemCode") ItemCode itemCode, Pageable pageable) {
+      return itemService.findAllItemsByItemCodePages(itemCode, pageable);
+
+    }
 
     //상품저장
     @PostMapping("/api/v1/items")

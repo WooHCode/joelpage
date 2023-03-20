@@ -107,8 +107,6 @@ public class EmployeeService {
         int diffWorkTime = ((int) difference.getSeconds() / 3600);
         // 하루가 지났다면 -24시간이 되어있기때문에 정확한 데이터를 위해 +24를 해주면 그 차이가 나온다.
         if (diffWorkTime < 0) diffWorkTime += 24;
-        System.out.println("diff = " + (int) difference.getSeconds());
-        System.out.println("diffWorkTime = " + diffWorkTime);
         totalEmpPay = diffWorkTime * payPerHour;
         totalEmpPay = employee.getEmpPay() + totalEmpPay;
         employee.toEntity(dto.getEmpName(), dto.getEmpPhone(), dto.getEmpEmail(), dto.getEmpEnterDate(), dto.getOffTime(), dto.getEmpGender(), plusWorkCount, totalEmpPay, dto.getEmpAge(), dto.getEmpDescription());

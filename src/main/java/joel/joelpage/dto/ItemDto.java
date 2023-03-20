@@ -4,8 +4,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import joel.joelpage.entity.ItemCode;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,4 +22,14 @@ public class ItemDto {
     private ItemCode itemCode;
 
 
+    public ItemDto(String name, int price, String imgPath, String itemDes, ItemCode itemCode) {
+        this.name = name;
+        this.price = price;
+        this.imgPath = imgPath;
+        this.itemDes = itemDes;
+        this.itemCode = itemCode;
+    }
+
+    public ItemDto() {
+    }
 }
