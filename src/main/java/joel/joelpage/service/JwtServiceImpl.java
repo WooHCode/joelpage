@@ -2,6 +2,7 @@ package joel.joelpage.service;
 
 import io.jsonwebtoken.*;
 import jakarta.xml.bind.DatatypeConverter;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 public class JwtServiceImpl implements JwtService{
 
     private String publicKey = getPublicKey();
@@ -25,7 +27,7 @@ public class JwtServiceImpl implements JwtService{
     public String getToken(String key, Object value) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         Date expTime = new Date();
-        expTime.setTime(expTime.getTime() * 1000 * 60 * 5);
+        expTime.setTime(expTime.getTime() * 1000 * 60 * 30);
 
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 
@@ -51,6 +53,26 @@ public class JwtServiceImpl implements JwtService{
                 .signWith(privateKey, SignatureAlgorithm.RS256);
 
         return builder.compact();
+    }
+
+    @Override
+    public Claims getClaims(String token) {
+        if (token != null || "".equals(token)) {
+            try {
+                KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+                byte[] privateBytes = Base64.getDecoder().decode(privateKey);
+                PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateBytes);
+                PrivateKey privateKey = keyFactory.generatePrivate(privateKeySpec);
+                return Jwts.parserBuilder().setSigningKey(privateKey).build().parseClaimsJws(token).getBody();
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                throw new RuntimeException(e);
+            } catch (ExpiredJwtException e) {
+
+            } catch (JwtException e) {
+
+            }
+        }
+        return null;
     }
 
     public String getPublicKey() throws NoSuchAlgorithmException {

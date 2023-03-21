@@ -1,17 +1,15 @@
 package joel.joelpage.api;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import joel.joelpage.entity.LoginMember;
 import joel.joelpage.repository.LoginRepository;
 import joel.joelpage.service.JwtService;
-import joel.joelpage.service.JwtServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.NoSuchAlgorithmException;
@@ -23,6 +21,7 @@ import java.util.Map;
 public class LoginApiController {
 
     private final LoginRepository loginRepository;
+    private final JwtService jwtService;
 
     @PostMapping("/api/account/login")
     public ResponseEntity login(@RequestBody Map<String, String> params,
@@ -30,7 +29,6 @@ public class LoginApiController {
         LoginMember loginMember = loginRepository.findByMemberIdAndPassword(params.get("ide"), params.get("password"));
 
         if (loginMember != null) {
-            JwtService jwtService = new JwtServiceImpl();
             Long id = loginMember.getSeq();
             String token = jwtService.getToken("id", id);
 
@@ -39,9 +37,29 @@ public class LoginApiController {
             cookie.setPath("/");
 
             response.addCookie(cookie);
-            return ResponseEntity.ok().build();
+            return new ResponseEntity<>(id, HttpStatus.OK);
 
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/api/account/check")
+    public ResponseEntity check(@CookieValue(value = "token", required = false) String token) {
+        Claims claims = jwtService.getClaims(token);
+
+        if (claims != null) {
+            int id = Integer.parseInt(claims.get("id").toString());
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+    @PostMapping("/api/account/logout")
+    public ResponseEntity logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("token",null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+
+        response.addCookie(cookie);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
