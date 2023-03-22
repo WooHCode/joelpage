@@ -98,8 +98,7 @@ public class ItemApiController {
         resultList.add(2,totalPages);
         return resultList;
     }
-
-    //TODO 상품코드로 검색구현
+    
     @GetMapping("/api/v4/items/{itemCode}")
     public Page<joel.joelpage.dto.ItemDto> itemResponseByItemCode(@PathVariable(value = "itemCode") ItemCode itemCode, Pageable pageable) {
       return itemService.findAllItemsByItemCodePages(itemCode, pageable);

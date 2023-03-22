@@ -27,7 +27,7 @@ public class JwtServiceImpl implements JwtService{
     public String getToken(String key, Object value) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         Date expTime = new Date();
-        expTime.setTime(expTime.getTime() * 1000 * 60 * 30);
+        expTime.setTime(expTime.getTime() * 1000 * 60 * 30); //현재시간에서 30분
 
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 

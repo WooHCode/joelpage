@@ -50,6 +50,10 @@ public class Employee extends BaseTime {
     @Column(name = "emp_description")
     private String empDescription;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "login_seq")
+    private LoginMember loginMember;
+
     public Employee(Long id, String empName, String empPhone, String empEmail, LocalDate enterDate, LocalDateTime workDate, EmpGender empGender, boolean isWorked, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;
         this.empName = empName;
@@ -76,5 +80,19 @@ public class Employee extends BaseTime {
         this.empPay = empPay;
         this.empAge = empAge;
         this.empDescription = empDescription;
+    }
+
+    public void toEmployeeEntity(String empName, String empPhone, String empEmail, LocalDate enterDate, LocalDateTime workDate, EmpGender gender, int empWorkCount, int empPay, int empAge, String empDescription, LoginMember loginMember) {
+        this.empName = empName;
+        this.empPhone = empPhone;
+        this.empEmail = empEmail;
+        this.enterDate = enterDate;
+        this.workDate = workDate;
+        this.empGender = gender;
+        this.empWorkCount = empWorkCount;
+        this.empPay = empPay;
+        this.empAge = empAge;
+        this.empDescription = empDescription;
+        this.loginMember = loginMember;
     }
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Entity
-@Table(name = "members")
+@Table(name = "loginMember")
 public class LoginMember {
 
     @Id
@@ -18,4 +18,10 @@ public class LoginMember {
 
     @Column(name = "member_pw", nullable = false, length = 100)
     private String password;
+
+    @Column(name = "member_code", nullable = false)
+    private int memberCode;  //0은 관리자 1은 평직원
+
+    @OneToOne(mappedBy = "loginMember")
+    private Employee employee;
 }

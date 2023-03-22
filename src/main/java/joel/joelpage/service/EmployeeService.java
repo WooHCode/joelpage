@@ -4,6 +4,7 @@ import joel.joelpage.dto.EmpDto;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
+import joel.joelpage.entity.LoginMember;
 import joel.joelpage.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

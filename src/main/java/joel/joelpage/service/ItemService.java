@@ -59,8 +59,6 @@ public class ItemService {
     public List<Item> findItemsByNameLike(String likeName) {
         List<Item> nameLike = itemRepository.findByNameLike("%"+likeName+"%");
         if (nameLike.isEmpty()){
-            // TODO 반환값이 없을때 기능 구현하기
-            System.out.println("비어있습니다.");
             return null;
         }
         return nameLike;

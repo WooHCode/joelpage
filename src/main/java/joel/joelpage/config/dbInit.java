@@ -2,17 +2,12 @@ package joel.joelpage.config;
 
 import jakarta.annotation.PostConstruct;
 import joel.joelpage.dto.EmpDto;
-import joel.joelpage.dto.UpdateItemDto;
-import joel.joelpage.dto.UpdateSaleDto;
 import joel.joelpage.entity.EmpGender;
-import joel.joelpage.entity.ItemCode;
 import joel.joelpage.service.EmployeeService;
-import joel.joelpage.service.ItemService;
 import joel.joelpage.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Configuration
@@ -23,7 +18,7 @@ public class dbInit {
 
     private final SaleService saleService;
 
-    //@PostConstruct
+    @PostConstruct
     public void init() {
         for (int i = 0; i < 12; i++) {
             EmpDto dto = EmpDto.builder()
@@ -37,7 +32,7 @@ public class dbInit {
                     .build();
             employeeService.saveEmp(dto);
         }
-        for (int i = 1; i < 8; i++) {
+        /*for (int i = 1; i < 8; i++) {
             UpdateSaleDto dto = UpdateSaleDto.builder()
                     .saleItemName("아메리카노" + i)
                     .saleItemCode(ItemCode.COFFEE)
@@ -47,6 +42,6 @@ public class dbInit {
                     .saleItemPrice(2500)
                     .build();
             saleService.saveOneSaleByDto(dto);
-        }
+        }*/
     }
 }

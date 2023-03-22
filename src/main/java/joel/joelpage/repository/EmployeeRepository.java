@@ -22,4 +22,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Page<Employee> findByEmpName(String empName, Pageable pageable);
 
     Employee findByEmpName(String empName);
+
 }
