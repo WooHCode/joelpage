@@ -18,7 +18,7 @@ public class dbInit {
 
     private final SaleService saleService;
 
-    @PostConstruct
+    //@PostConstruct
     public void init() {
         for (int i = 0; i < 12; i++) {
             EmpDto dto = EmpDto.builder()

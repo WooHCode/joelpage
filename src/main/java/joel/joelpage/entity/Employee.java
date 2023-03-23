@@ -1,5 +1,6 @@
 package joel.joelpage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Employee extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +53,7 @@ public class Employee extends BaseTime {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "login_seq")
+    @JsonIgnore // 재귀 호출 방지
     private LoginMember loginMember;
 
     public Employee(Long id, String empName, String empPhone, String empEmail, LocalDate enterDate, LocalDateTime workDate, EmpGender empGender, boolean isWorked, int empWorkCount, int empPay, int empAge, String empDescription) {

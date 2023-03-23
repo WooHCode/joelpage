@@ -1,11 +1,14 @@
 package joel.joelpage.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
 @Table(name = "loginMember")
+@NoArgsConstructor
 public class LoginMember {
 
     @Id
@@ -24,4 +27,13 @@ public class LoginMember {
 
     @OneToOne(mappedBy = "loginMember")
     private Employee employee;
+
+    @Builder
+    public LoginMember(Long seq, String memberId, String password, int memberCode, Employee employee) {
+        this.seq = seq;
+        this.memberId = memberId;
+        this.password = password;
+        this.memberCode = memberCode;
+        this.employee = employee;
+    }
 }

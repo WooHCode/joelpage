@@ -1,6 +1,8 @@
 package joel.joelpage.controller;
 
 import joel.joelpage.dto.EmpDto;
+import joel.joelpage.dto.EmpWithLoginInfoDto;
+import joel.joelpage.dto.LoginInfoDto;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.Employee;
 import joel.joelpage.service.EmployeeService;
@@ -25,13 +27,13 @@ public class EmpController {
     // ems 폼으로 받아 createform으로 전달
     @GetMapping("/emp/new")
     public String empCreate(Model model) {
-        model.addAttribute("ems",new EmpDto());
+        model.addAttribute("empWithLoginInfoDto", new EmpWithLoginInfoDto());
         return "emp/createEmpForm";
     }
 
     @PostMapping("/emp/new")
-    public String empCreateForm(EmpDto dto) {
-        employeeService.saveEmp(dto);
+    public String empCreateForm(@ModelAttribute("empWithLoginInfoDto") EmpWithLoginInfoDto dto) {
+        employeeService.saveEmpWithLoginInfo(dto.getEmpDto(), dto.getLoginInfoDto());
         return "redirect:/home";
     }
     //한건 삭제

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     /** 전체 조회 후 내림 차순으로 정렬 */
@@ -22,5 +23,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Page<Employee> findByEmpName(String empName, Pageable pageable);
 
     Employee findByEmpName(String empName);
+
+    @Query("SELECT e FROM Employee e WHERE e.loginMember.seq = :loginMemberSeq")
+    Employee findByLoginMemberSeq(Long loginMemberSeq);
 
 }

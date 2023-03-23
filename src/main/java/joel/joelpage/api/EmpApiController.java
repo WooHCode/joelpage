@@ -31,8 +31,15 @@ public class EmpApiController {
 
     @GetMapping("/api/v3/emp")
     public List<Employee> findPage(Pageable pageable) {
-        List<Employee> employeeList = employeeService.findAllWithPage(pageable).getContent();
-        return employeeList;
+        return employeeService.findAllWithPage(pageable).getContent();
+    }
+
+    @GetMapping("/api/v4/emp/{loginId}")
+    public EmpDto myPageEmpInfo(@PathVariable("loginId") Long loginId) {
+        Employee findMember = employeeService.findByLoginMemberId(loginId);
+        return new EmpDto(findMember.getId(),findMember.getEmpName(),findMember.getEmpEmail(),
+                findMember.getEmpPhone(),findMember.getWorkDate(),findMember.getEmpGender(),
+                findMember.isWorked(),findMember.getEmpWorkCount(),findMember.getEmpPay(),findMember.getEmpAge(),findMember.getEmpDescription());
     }
     @GetMapping("/api/v3/emp/total")
     public List<Number> findPageCount(Pageable pageable) {

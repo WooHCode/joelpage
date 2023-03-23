@@ -1,6 +1,7 @@
 package joel.joelpage.service;
 
 import joel.joelpage.dto.EmpDto;
+import joel.joelpage.dto.LoginInfoDto;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
@@ -35,7 +36,12 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        try {
+            return employeeRepository.findAll();
+        } catch (IllegalStateException e) {
+            throw e;
+        }
+
     }
 
     public Page<Employee> findAllWithPage(Pageable pageable) {
@@ -92,6 +98,19 @@ public class EmployeeService {
                 dto.getGender(), false, dto.getWorkCount(), dto.getPay(), dto.getAge(), dto.getEmpDesc());
         Employee savedEmp = employeeRepository.save(newEmp);
         return savedEmp.getId();
+    }
+
+    @Transactional
+    public void saveEmpWithLoginInfo(EmpDto dto, LoginInfoDto infoDto) {
+        Employee employee = new Employee();
+        LoginMember loginMember = LoginMember.builder()
+                .memberId(infoDto.getInfoId())
+                .password(infoDto.getInfoPw())
+                .memberCode(infoDto.getInfoCode())
+                .build();
+        employee.toEmployeeEntity(dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),dto.getGender(),dto.getWorkCount(),
+                dto.getPay(),dto.getAge(),dto.getEmpDesc(),loginMember);
+        employeeRepository.save(employee);
     }
 
     /**
@@ -159,5 +178,11 @@ public class EmployeeService {
             startTime = dto.getStartWorkTime().toLocalTime();
         }
         return startTime;
+    }
+
+    public Employee findByLoginMemberId(Long id) {
+        Employee employee = employeeRepository.findByLoginMemberSeq(id);
+        System.out.println("employee = " + employee);
+        return employee;
     }
 }

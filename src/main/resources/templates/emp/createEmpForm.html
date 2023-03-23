@@ -7,42 +7,55 @@
 </head>
 <body>
 <div class="container">
-    <form th:action="@{/emp/new}" th:object="${ems}" method="post">
+    <form th:action="@{/emp/new}" th:object="${empWithLoginInfoDto}" method="post">
         <div class="form-group">
             <label th:for="name">이름</label>
-            <input type="text" th:field="*{name}" class="form-control"
+            <input type="text" th:field="*{empDto.name}" class="form-control"
                    placeholder="이름을 입력하세요">
         </div>
         <div class="form-group">
             <label th:for="gender">성별</label>
-            <input type="radio" th:field="*{gender}" class="form-control-check" value="M" checked
-                   >남자
-            <input type="radio" th:field="*{gender}" class="form-control-check" value="W"
-                   >여자
+            <input type="radio" th:field="*{empDto.gender}" class="form-control-check" value="M" checked>남자
+            <input type="radio" th:field="*{empDto.gender}" class="form-control-check" value="W">여자
         </div>
         <div class="form-group">
             <label th:for="age">나이</label>
-            <input type="number" th:field="*{age}" class="form-control"
+            <input type="number" th:field="*{empDto.age}" class="form-control"
                    placeholder="나이를 입력하세요">
         </div>
         <div class="form-group">
             <label th:for="phone">전화번호</label>
-            <input type="text" th:field="*{phone}" class="form-control"
+            <input type="text" th:field="*{empDto.phone}" class="form-control"
                    placeholder="전화번호를 입력하세요">
         </div>
         <div class="form-group">
-            <label th:for="enterDate">전화번호</label>
-            <input type="date" th:field="*{enterDate}" class="form-control"
-                   placeholder="전화번호를 입력하세요">
+            <label th:for="enterDate">입사일</label>
+            <input type="date" th:field="*{empDto.enterDate}" class="form-control"
+                   placeholder="입사일을 입력하세요">
         </div>
         <div class="form-group">
             <label th:for="email">이메일</label>
-            <input type="email" th:field="*{email}" class="form-control"
+            <input type="email" th:field="*{empDto.email}" class="form-control"
                    placeholder="이메일을 입력하세요">
         </div>
         <div class="form-group">
+            <label th:for="infoId">사용할 ID입력</label>
+            <input type="text" th:field="*{loginInfoDto.infoId}" class="form-control"
+                   placeholder="전화번호의 형식으로 입력">
+        </div>
+        <div class="form-group">
+            <label th:for="infoPw">사용할 pw입력</label>
+            <input type="text" th:field="*{loginInfoDto.infoPw}" class="form-control"
+                   placeholder="비밀번호를 입력">
+        </div>
+        <div class="form-group">
+            <label th:for="infoCode">직원 코드(0은관리자,1은직원)</label>
+            <input type="number" th:field="*{loginInfoDto.infoCode}" class="form-control"
+                   placeholder="직원코드를 입력">
+        </div>
+        <div class="form-group">
             <label th:for="empDesc">직원 상세설명</label>
-            <input type="text" style="width:300px;height:200px;font-size:22px;" th:field="*{empDesc}" class="form-control"
+            <input type="text" style="width:300px;height:200px;font-size:22px;" th:field="*{empDto.empDesc}" class="form-control"
                    placeholder="상세설명">
         </div> <br>
         <button type="submit" class="btn btn-primary">Submit</button>
