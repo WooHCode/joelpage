@@ -103,11 +103,8 @@ public class EmployeeService {
     @Transactional
     public void saveEmpWithLoginInfo(EmpDto dto, LoginInfoDto infoDto) {
         Employee employee = new Employee();
-        LoginMember loginMember = LoginMember.builder()
-                .memberId(infoDto.getInfoId())
-                .password(infoDto.getInfoPw())
-                .memberCode(infoDto.getInfoCode())
-                .build();
+        LoginMember loginMember = new LoginMember();
+        loginMember.toEntity(infoDto.getInfoId(),infoDto.getInfoPw(),infoDto.getInfoCode());
         employee.toEmployeeEntity(dto.getName(),dto.getPhone(),dto.getEmail(),dto.getEnterDate(),dto.getWorkDate(),dto.getGender(),dto.getWorkCount(),
                 dto.getPay(),dto.getAge(),dto.getEmpDesc(),loginMember);
         employeeRepository.save(employee);

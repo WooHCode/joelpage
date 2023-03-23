@@ -36,4 +36,10 @@ public class LoginMember {
         this.memberCode = memberCode;
         this.employee = employee;
     }
+
+    public void toEntity(String memberId, String password, int memberCode) {
+        this.memberId = memberId;
+        this.password = password;
+        this.memberCode = memberCode;
+    }
 }

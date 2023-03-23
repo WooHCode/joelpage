@@ -1,6 +1,7 @@
 package joel.joelpage.api;
 
 import joel.joelpage.dto.EmpDto;
+import joel.joelpage.dto.EmpWithLoginInfoDto;
 import joel.joelpage.dto.UpdateEmployeeDto;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -86,7 +88,11 @@ public class EmpApiController {
         Long id = employeeService.saveEmp(dto);
         return new CreateEmpResponse(id);
     }
-
+    @PostMapping("/api/v2/emp/save")
+    public ResponseEntity saveEmpWithLoginInfo(@RequestBody EmpWithLoginInfoDto dto) {
+        employeeService.saveEmpWithLoginInfo(dto.getEmpDto(),dto.getLoginInfoDto());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @PatchMapping("/api/v1/emp/update/{empId}")
     public HttpStatus updateEmp(@PathVariable("empId") Long id, @RequestBody UpdateEmployeeDto dto) {
         Employee findEmp = employeeService.findOneEmp(id);
@@ -96,6 +102,11 @@ public class EmpApiController {
 
     @PutMapping("/empDetail/api/v1/emp/update/{empId}")
     public HttpStatus updateEmpDetail(@PathVariable("empId") Long id, @RequestBody UpdateEmployeeDto dto) {
+        employeeService.updateEmpById(id, dto);
+        return HttpStatus.OK;
+    }
+    @PutMapping("/api/v2/emp/update/{empId}")
+    public HttpStatus updateMyPageDetail(@PathVariable("empId") Long id, @RequestBody UpdateEmployeeDto dto) {
         employeeService.updateEmpById(id, dto);
         return HttpStatus.OK;
     }
