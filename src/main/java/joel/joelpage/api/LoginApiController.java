@@ -34,14 +34,23 @@ public class LoginApiController {
         if (loginMember != null) {
             Long id = loginMember.getSeq();
             String empName = employeeService.findByLoginMemberId(id).getEmpName();
+            String memberCode = String.valueOf(employeeService.findByLoginMemberId(id).getLoginMember().getMemberCode());
             String token = jwtService.getToken("id", id);
-            Map<Long, String> answerMap = new HashMap<>();
-            answerMap.put(id,empName);
+            Map<Integer, Object> answerMap = new HashMap<>();
+            answerMap.put(1,empName);
+            answerMap.put(2, id);
 
             Cookie cookie = new Cookie("token", token);
             cookie.setHttpOnly(true);
             cookie.setPath("/");
 
+            Cookie memberCodeCookie = new Cookie("memberCode", memberCode);
+            memberCodeCookie.setMaxAge(60*60*24);
+            memberCodeCookie.setPath("/");
+            memberCodeCookie.setHttpOnly(false);
+            answerMap.put(3, memberCode);
+
+            response.addCookie(memberCodeCookie);
             response.addCookie(cookie);
             return new ResponseEntity<>(answerMap, HttpStatus.OK);
 
@@ -65,7 +74,12 @@ public class LoginApiController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
 
+        Cookie memberCodeCookie = new Cookie("memberCode", null);
+        memberCodeCookie.setMaxAge(0);
+        memberCodeCookie.setPath("/");
+
         response.addCookie(cookie);
+        response.addCookie(memberCodeCookie);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
