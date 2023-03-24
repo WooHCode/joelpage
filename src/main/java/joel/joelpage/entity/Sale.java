@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -27,7 +27,7 @@ public class Sale {
     private ItemCode saleItemCode;
 
     @Column(name = "sale_date")
-    private LocalDate saleDate;
+    private LocalDateTime saleDate;
 
     @Column(name = "sale_count")
     private int saleCount;
@@ -36,7 +36,7 @@ public class Sale {
     private int itemTotalSale;
 
     @Builder
-    public Sale(Long id, String saleItemName, int saleItemPrice, ItemCode saleItemCode, LocalDate saleDate, int saleCount, int itemTotalSale) {
+    public Sale(Long id, String saleItemName, int saleItemPrice, ItemCode saleItemCode, LocalDateTime saleDate, int saleCount, int itemTotalSale) {
         this.id = id;
         this.saleItemName = saleItemName;
         this.saleItemPrice = saleItemPrice;
@@ -45,7 +45,7 @@ public class Sale {
         this.saleCount = saleCount;
         this.itemTotalSale = itemTotalSale;
     }
-    public void toEntity(String saleItemName, int saleItemPrice, LocalDate saleDate, int saleCount, int itemTotalSale) {
+    public void toEntity(String saleItemName, int saleItemPrice, LocalDateTime saleDate, int saleCount, int itemTotalSale) {
         this.saleItemName = saleItemName;
         this.saleItemPrice = saleItemPrice;
         this.saleDate = saleDate;
