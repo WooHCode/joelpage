@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -55,6 +56,10 @@ public class Employee extends BaseTime {
     @JoinColumn(name = "login_seq")
     @JsonIgnore // 재귀 호출 방지
     private LoginMember loginMember;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Attendance> attendance;
+
 
     public Employee(Long id, String empName, String empPhone, String empEmail, LocalDate enterDate, LocalDateTime workDate, EmpGender empGender, boolean isWorked, int empWorkCount, int empPay, int empAge, String empDescription) {
         this.id = id;

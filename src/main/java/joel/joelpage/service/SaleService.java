@@ -77,7 +77,6 @@ public class SaleService {
             } else {
                 for (Sale sale : nowData) {
                     int oneCount = sale.getSaleCount() * sale.getSaleItemPrice();
-                    System.out.println("oneCount = " + oneCount);
                     insertDate = sale.getSaleDate().toLocalDate();
                     totalCount += oneCount;
                 }

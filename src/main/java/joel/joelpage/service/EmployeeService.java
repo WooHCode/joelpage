@@ -179,7 +179,6 @@ public class EmployeeService {
 
     public Employee findByLoginMemberId(Long id) {
         Employee employee = employeeRepository.findByLoginMemberSeq(id);
-        System.out.println("employee = " + employee);
         return employee;
     }
 }
