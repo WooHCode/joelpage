@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -34,8 +35,8 @@ public class SaleService {
 
     public Map<String, Integer> findAllByMonth() {
         HashMap<String, Integer> resultMap = new HashMap<>();
-        LocalDate startDate = LocalDate.now().withMonth(1).withDayOfMonth(1); // 올해의 1월 1일
-        LocalDate endDate = startDate.plusYears(1); // 올해의 12월 31일
+        LocalDateTime startDate = LocalDateTime.now().withMonth(1).withDayOfMonth(1); // 올해의 1월 1일
+        LocalDateTime endDate = startDate.plusYears(1); // 올해의 12월 31일
 
         List<Sale> saleList = saleRepository.findAllBySaleDateBetween(startDate, endDate);
 
@@ -60,32 +61,31 @@ public class SaleService {
 
     public Map<LocalDate, Integer> findAllByWeekDate() {
         HashMap<LocalDate, Integer> resultMap = new HashMap<>();
-        LocalDate startDate = LocalDate.now().minusDays(7);
-        LocalDate endDate = LocalDate.now();
+        LocalDateTime endDate = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
+        LocalDateTime startDate = endDate.minusDays(6).withHour(0).withMinute(0).withSecond(0);
         List<Sale> allBySaleDateBetween = saleRepository.findBySaleDateBetween(startDate, endDate);
 
-        for (int i = 0; i < 8; i++) {
-            int minusDate = i;
-            int totalCount = 0;
-            LocalDate insertDate = null;
+        LocalDate insertDate = startDate.toLocalDate();
 
+        for (int i = 0; i < 7; i++) {
+            int totalCount = 0;
+            LocalDate finalInsertDate = insertDate;
             List<Sale> nowData = allBySaleDateBetween.stream()
-                    .filter(n -> n.getSaleDate().isEqual(LocalDate.now().minusDays(minusDate))).toList();
+                    .filter(n -> n.getSaleDate().toLocalDate().equals(finalInsertDate)).toList();
             if (nowData.size() == 0) {
-                insertDate = LocalDate.now();
-                totalCount = 0;
+                resultMap.put(insertDate, 0);
             } else {
                 for (Sale sale : nowData) {
                     int oneCount = sale.getSaleCount() * sale.getSaleItemPrice();
-                    insertDate = sale.getSaleDate();
+                    System.out.println("oneCount = " + oneCount);
+                    insertDate = sale.getSaleDate().toLocalDate();
                     totalCount += oneCount;
-
                 }
+                resultMap.put(insertDate, totalCount);
             }
-            resultMap.put(insertDate, totalCount);
-            insertDate = null;
-            totalCount = 0;
+            insertDate = insertDate.plusDays(1);
         }
+
         return resultMap;
     }
 
@@ -95,8 +95,8 @@ public class SaleService {
         int initValue;
 
         List<Sale> saleList = saleRepository.findBySaleItemCode(itemCode);
-        int year = LocalDate.now().getYear();
-        int monthValue = LocalDate.now().getMonthValue();
+        int year = LocalDateTime.now().getYear();
+        int monthValue = LocalDateTime.now().getMonthValue();
 
         List<Sale> collect = saleList.stream()
                 .filter(s -> s.getSaleDate().getYear() == year && s.getSaleDate().getMonthValue() == monthValue).toList();
