@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public class UpdateSaleDto {
 
     private int saleItemPrice;
 
-    private LocalDate saleDate;
+    private LocalDateTime saleDate;
 
     @Enumerated(EnumType.STRING)
     private ItemCode saleItemCode;
@@ -29,7 +29,7 @@ public class UpdateSaleDto {
     private int itemTotalSale;
 
     @Builder
-    public UpdateSaleDto( String saleItemName, int saleItemPrice, LocalDate saleDate, ItemCode saleItemCode, int saleCount, int itemTotalSale) {
+    public UpdateSaleDto( String saleItemName, int saleItemPrice, LocalDateTime saleDate, ItemCode saleItemCode, int saleCount, int itemTotalSale) {
         this.saleItemName = saleItemName;
         this.saleItemPrice = saleItemPrice;
         this.saleDate = saleDate;

@@ -36,7 +36,7 @@ public class dbInit {
             UpdateSaleDto dto = UpdateSaleDto.builder()
                     .saleItemName("아메리카노" + i)
                     .saleItemCode(ItemCode.COFFEE)
-                    .saleDate(LocalDate.now().minusDays(i))
+                    .saleDate(LocalDateTime.now().minusDays(i))
                     .saleCount(25)
                     .itemTotalSale(300)
                     .saleItemPrice(2500)

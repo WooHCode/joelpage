@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -14,10 +14,10 @@ public class SaveSaleDto {
     private int itemCount;
     private ItemCode itemCode;
     private int itemPrice;
-    private LocalDate saleDate;
+    private LocalDateTime saleDate;
 
     @Builder
-    public SaveSaleDto(String itemName, int itemCount, ItemCode itemCode, int itemPrice, LocalDate saleDate) {
+    public SaveSaleDto(String itemName, int itemCount, ItemCode itemCode, int itemPrice, LocalDateTime saleDate) {
         this.itemName = itemName;
         this.itemCount = itemCount;
         this.itemCode = itemCode;
