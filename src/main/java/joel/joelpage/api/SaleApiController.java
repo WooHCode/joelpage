@@ -7,10 +7,11 @@ import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.service.SaleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,7 +31,8 @@ public class SaleApiController {
 
     @GetMapping("/api/v1/sales")
     public Map<LocalDate, Integer> getWeeklySale() {
-        return saleService.findAllByWeekDate();
+        Map<LocalDate, Integer> allByWeekDate = saleService.findAllByWeekDate();
+        return allByWeekDate;
     }
     @GetMapping("/api/v2/sales")
     public Map<String,Integer> getMonthlySale() {
