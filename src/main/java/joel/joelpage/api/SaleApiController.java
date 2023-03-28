@@ -2,7 +2,6 @@ package joel.joelpage.api;
 
 import joel.joelpage.dto.SaleDto;
 import joel.joelpage.dto.SaveSaleDto;
-import joel.joelpage.dto.WeekSaleDto;
 import joel.joelpage.entity.ItemCode;
 import joel.joelpage.entity.Sale;
 import joel.joelpage.service.SaleService;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
