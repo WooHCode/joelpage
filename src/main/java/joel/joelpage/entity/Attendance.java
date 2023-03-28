@@ -24,4 +24,13 @@ public class Attendance {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    public void toAttendTime(LocalDateTime time, Employee employee) {
+        this.attendTime = time;
+        this.employee = employee;
+    }
+
+    public void AttendTimeChange(LocalDateTime time) {
+        this.attendTime = time;
+    }
 }

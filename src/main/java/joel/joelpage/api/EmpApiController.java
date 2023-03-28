@@ -1,10 +1,10 @@
 package joel.joelpage.api;
 
-import joel.joelpage.dto.EmpDto;
-import joel.joelpage.dto.EmpWithLoginInfoDto;
-import joel.joelpage.dto.UpdateEmployeeDto;
+import joel.joelpage.dto.*;
+import joel.joelpage.entity.Attendance;
 import joel.joelpage.entity.EmpGender;
 import joel.joelpage.entity.Employee;
+import joel.joelpage.service.AttendantService;
 import joel.joelpage.service.EmployeeService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +14,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 public class EmpApiController {
     private final EmployeeService employeeService;
+    private final AttendantService attendantService;
 
     @GetMapping("/api/v1/emp")
     public List<Employee> findAllEmp(){
@@ -52,7 +55,13 @@ public class EmpApiController {
         resList.add(1, totalElements);
         return resList;
     }
-
+    @GetMapping("/api/v5/emp/{loginId}")
+    public List<AttendantInfoDto> findAllEmpWork(@PathVariable(value = "loginId") Long loginId) {
+        Employee loginMember = employeeService.findByLoginMemberId(loginId);
+        List<Attendance> attList = attendantService.findAllAttendance(loginMember.getId());
+        return attList.stream().map(a -> new AttendantInfoDto
+                (loginMember.getEmpName(), loginMember.getEmpPay(), loginMember.getEmpWorkCount(), a.getAttendTime())).collect(Collectors.toList());
+    }
     @GetMapping("/empDetail/api/v1/emp/{searchName}")
     public EmpDto findOneEmpByName(@PathVariable(value = "searchName") String name) {
         Employee findEmp = employeeService.findByEmpName(name);
@@ -74,8 +83,7 @@ public class EmpApiController {
 
     @GetMapping("/api/v1/emp/search")
     public Page<Employee> findEmpWithEmpGender(@RequestParam EmpGender empGender, Pageable pageable) {
-        Page<Employee> genderPage = employeeService.findByGenderPage(empGender, pageable);
-        return genderPage;
+        return employeeService.findByGenderPage(empGender, pageable);
     }
 
     @GetMapping("/api/v2/emp/search")
@@ -91,6 +99,35 @@ public class EmpApiController {
     @PostMapping("/api/v2/emp/save")
     public ResponseEntity saveEmpWithLoginInfo(@RequestBody EmpWithLoginInfoDto dto) {
         employeeService.saveEmpWithLoginInfo(dto.getEmpDto(),dto.getLoginInfoDto());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/api/v3/emp/work/{empId}")
+    public ResponseEntity saveEmpWork(@PathVariable("empId") Long id) {
+        Long attId = attendantService.saveWork(id);
+        return new ResponseEntity<>(attId,HttpStatus.OK);
+    }
+
+    @PatchMapping("/api/v3/emp/work/{empId}")
+    public ResponseEntity updateEmpWork(@PathVariable("empId") Long id, @RequestBody RequestWorkDto workDto) {
+        Employee employee = employeeService.findByLoginMemberId(id);
+        Attendance attendance = attendantService.findAttendance(workDto.getAttId());
+        LocalDateTime attendTime = LocalDateTime.now();
+        UpdateEmployeeDto dto = UpdateEmployeeDto.builder()
+                .id(employee.getId())
+                .empName(employee.getEmpName())
+                .empPhone(employee.getEmpPhone())
+                .empEmail(employee.getEmpEmail())
+                .empEnterDate(employee.getEnterDate())
+                .offTime(attendTime)
+                .startWorkTime(employee.getWorkDate())
+                .empGender(employee.getEmpGender())
+                .empWorkCount(employee.getEmpWorkCount())
+                .empPay(employee.getEmpPay())
+                .empAge(employee.getEmpAge())
+                .empDescription(employee.getEmpDescription())
+                .build();
+        employeeService.updateEmp(dto);
+        attendance.AttendTimeChange(attendTime);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PatchMapping("/api/v1/emp/update/{empId}")

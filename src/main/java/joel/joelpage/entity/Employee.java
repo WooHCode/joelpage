@@ -58,6 +58,7 @@ public class Employee extends BaseTime {
     private LoginMember loginMember;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Attendance> attendance;
 
 
@@ -101,5 +102,14 @@ public class Employee extends BaseTime {
         this.empAge = empAge;
         this.empDescription = empDescription;
         this.loginMember = loginMember;
+    }
+
+    public void saveAtt(Attendance attendance) {
+        this.attendance.add(attendance);
+        this.isWorked = true;
+    }
+
+    public void updateWorkDate(LocalDateTime time) {
+        this.workDate = time;
     }
 }
