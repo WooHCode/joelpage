@@ -7,18 +7,29 @@
 ---
 
 ### &#x1F4BB; 사용 기술스택:
-<img src="https://img.shields.io/badge/Java-221144?style=flat-square&logo=Java&logoColor=green">
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white">
 
-- vue3, vue Router, vuex 
+- Java
 
-<img src="https://img.shields.io/badge/javascript-ffff00?style=flat-square&logo=javascript&logoColor=green">
+<img src="https://img.shields.io/badge/springboot-BFF0B6?style=flat-square&logo=springboot&logoColor=green">
 
-- javascript ES6
+- Spring, SpringBoot, Spring web Mvc, Spring Data JPA, Spring Validation 
 
-<img src="https://img.shields.io/badge/html5-FF818D?style=flat-square&logo=html5&logoColor=">
+<img src="https://img.shields.io/badge/postgresql-51ADCE?style=flat-square&logo=postgresql&logoColor=">
 
-- HTML5
+- Postgresql, Amazno RDS
 
-<img src="https://img.shields.io/badge/css3-7CB1F7?style=flat-square&logo=css3&logoColor=blue">
+<img src="https://img.shields.io/badge/AWS-F2E1B9?style=flat-square&logo=AWS&logoColor=">
 
-- CSS3
+- AWS EC2, Apache Tomcat
+
+##### 추가 라이브러리
+
+- P6spy(로그 콘솔창 출력 라이브러리)
+
+---
+
+### 🛠️ 개발 도구:
+- Intellij, putty, aws console, vscode(프론트 개발), postman, pgAdmin, git
+
+프론트 페이지 링크: https://github.com/WooHCode/joeladminPage
