@@ -40,7 +40,7 @@
 
 ---
 
-#### &#x1F4D8; 개발과정 중 
+#### &#x1F4D8; 개발과정 중 트러블 슈팅
 
 1. Transaction
 - 문제 : 트랜잭션 단위를 클래스 단위로 설정하니 읽기 전용 작업 시에도 EntityManager에서 flush, commit을 진행하여 성능이 저하
@@ -64,7 +64,10 @@
 5. LocalDateTime 사용 문제
 - 문제 : LocalDateTime으로 시간 비교 시 duration을 사용해서 비교를 하게되면 다음날이 되어 시간이 00시 이후가 되면 차이 값이 -가된다.
 - 해결: difference.getSeconds()/3600 의 값이 - 로 나온다면 +24를 더해서 하루가 지났다는것을 인지시켜준다.
-- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/service/EmployeeService.java ==>  117 ~ 129 Line
----
+- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/service/EmployeeService.java 
+- ==>  117 ~ 129 Line
 
+---
+### 📘 추가 보완 사항
+1. 
 
