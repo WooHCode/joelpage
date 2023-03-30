@@ -63,8 +63,8 @@ public class EmpApiController {
         return attList.stream().map(a -> new AttendantInfoDto
                 (loginMember.getEmpName(), loginMember.getEmpPay(), loginMember.getEmpWorkCount(), a.getAttendTime())).collect(Collectors.toList());
     }
-    @GetMapping("/{searchName}")
-    public EmpDto findOneEmpByName(@PathVariable(value = "searchName") String name) {
+    @GetMapping("/empDetail/api/v1/emp/{searchName}")
+    public ResponseEntity<EmpDto> findOneEmpByName(@PathVariable(value = "searchName") String name) {
         Employee findEmp = employeeService.findByEmpName(name);
         EmpDto resultEmp = EmpDto.builder()
                 .id(findEmp.getId())
@@ -79,7 +79,7 @@ public class EmpApiController {
                 .age(findEmp.getEmpAge())
                 .empDesc(findEmp.getEmpDescription())
                 .build();
-        return resultEmp;
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(resultEmp);
     }
 
     @GetMapping("/api/v1/emp/search")
