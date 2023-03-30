@@ -42,16 +42,29 @@
 
 #### &#x1F4D8; 개발과정 중 
 
-1. CORS에러
-- 문제 : 로컬환경에서 개발할때는 신경쓰지않아도 될 문제였지만, 서버를 ec2에 배포를 한 후 진행을 하니 지속적으로 CORS에러 발생
-- 해결 : proxy서버를 통해 요청을 보내던 api요청을 직접연결로 변경하여 CORS문제를 해결
-- 관련링크 : https://github.com/WooHCode/joeladminPage/blob/master/src/scripts/api.js
+1. Transaction
+- 문제 : 트랜잭션 단위를 클래스 단위로 설정하니 읽기 전용 작업 시에도 EntityManager에서 flush, commit을 진행하여 성능이 저하
+- 해결 : 클래스 단위에서 @Transactional(readOnly = true)로 설정하여 읽기전용 작업을 하는 메서드는 1차캐시에서 프록시로 생성된 객체를 읽어와 작업을 하고
+쓰기 등 DB에 변경이 되는 작업들은 메서드에 별도로 트랜잭션을 걸어주어서 정상적으로 DB에 반영되도록 함.
+- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/service/ItemService.java
 
-2. 렌더링 시점 문제
-- 문제: chart.js를 활용하여 매출데이터를 화면에 출력하는데 chart.js가 화면에 먼저 출력이 되고 그 이후에 데이터가 바인딩되어 화면이 출력되었을 때 빈 데이터 출력
-- 해결 : async, await로 메소드를 변경하여 api로 데이터가 완전히 받아진 후 데이터를 바인딩하게 하였음.
-- 관련링크 : https://github.com/WooHCode/joeladminPage/blob/master/src/pages/Home.vue   --> 44~54 Line
+2. N+1
+- 문제: Employee 엔티티와 Attendance 엔티티는 1 : 다 관계로 매핑되어있음. 그리하여 Employee를 전체조회하면 각 Employee에 관련된 Attendance가 추가로 여러번 쿼리가 발생되어 성능이 저하됨.
+- 해결 : Default값인 @ManyToOne(fetch = FetchType.EAGER)에서 @ManyToOne(fetch = FetchType.LAZY)로 변경하여 실제 데이터가 필요한 시점에서 데이터를 가져올 수 있도록 변경 
+- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Attendance.java ==> 24 Line
 
+3. 재귀호출
+- 문제 : LoginMember 엔티티와 연관된 필드가 JSON으로 serialize(직렬화) 될 때 무한 재귀 호출이 발생함. 그로인해 서버가 다운됨. LoginMember 엔티티가 Employee엔티티 내부에 있고, LoginMember 엔티티에 Employee가 내부에 있기때문에 LoginMember를 JSON으로 직렬화 하려고 할때, 내부에 있는 Employee필드를 다시 직렬화 하게되고 Employee필드를 직렬화 하게 될때, LoginMember를 다시 직렬화하는 과정을 반복하면서 발생함.
+- 해결 : @JsonIgnore 어도테이션을 사용하여 LoginMember필드가 JSON으로 다시 직렬화 되지 않도록 설정
+- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Employee.java  ==> 55 ~ 58 Line 
+4. CORS 문제
+- 문제 : 로컬 개발 환경에서는 프론트 서버와 통신에 문제가 없었지만, 서버를 EC2에 배포하다 보니 서버로 api요청 시 CORS문제가 발생함.
+- 해결 : API controller에 @CrossOrigin 을 지정해줘서 응답 헤더에 Access-Control-Allow-Origin의 값을 응답가능한 도메인을 추가해줘서 다른 도메인으로 부터 리소스 요청이 왔을 때 교차 오리진 자원 공유를 가능하게 함.
+- 관련 링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/api/EmpApiController.java  ==> 23 Line
+5. LocalDateTime 사용 문제
+- 문제 : LocalDateTime으로 시간 비교 시 duration을 사용해서 비교를 하게되면 다음날이 되어 시간이 00시 이후가 되면 차이 값이 -가된다.
+- 해결: difference.getSeconds()/3600 의 값이 - 로 나온다면 +24를 더해서 하루가 지났다는것을 인지시켜준다.
+- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/service/EmployeeService.java ==>  117 ~ 129 Line
 ---
 
 
