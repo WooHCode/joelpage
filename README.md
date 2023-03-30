@@ -68,6 +68,11 @@
 - ==>  117 ~ 129 Line
 
 ---
+
+![image](https://user-images.githubusercontent.com/112393201/228768854-bbac2cb2-41e4-4246-bdc6-9d9f29486c33.png)
+
+
+---
 ### 📘 추가 예정 사항
 1. Oauth2를 활용하여 Kakao, Google, Naver로 로그인이 가능하도록 구현
 2. Spring Security를 도입하여 별도로 나눠서 구현한 Jwt와 통합, CSRF(Cross-Site Request Forgery) 공격 방지, XSS(Cross-Site Scripting) 방어, 세션 관리, 브라우저 캐싱 방지 등 보안 기능을 강화.
