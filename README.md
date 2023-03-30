@@ -40,4 +40,18 @@
 
 ---
 
+#### &#x1F4D8; 개발과정 중 
+
+1. CORS에러
+- 문제 : 로컬환경에서 개발할때는 신경쓰지않아도 될 문제였지만, 서버를 ec2에 배포를 한 후 진행을 하니 지속적으로 CORS에러 발생
+- 해결 : proxy서버를 통해 요청을 보내던 api요청을 직접연결로 변경하여 CORS문제를 해결
+- 관련링크 : https://github.com/WooHCode/joeladminPage/blob/master/src/scripts/api.js
+
+2. 렌더링 시점 문제
+- 문제: chart.js를 활용하여 매출데이터를 화면에 출력하는데 chart.js가 화면에 먼저 출력이 되고 그 이후에 데이터가 바인딩되어 화면이 출력되었을 때 빈 데이터 출력
+- 해결 : async, await로 메소드를 변경하여 api로 데이터가 완전히 받아진 후 데이터를 바인딩하게 하였음.
+- 관련링크 : https://github.com/WooHCode/joeladminPage/blob/master/src/pages/Home.vue   --> 44~54 Line
+
+---
+
 
