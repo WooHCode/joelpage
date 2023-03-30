@@ -68,6 +68,8 @@
 - ==>  117 ~ 129 Line
 
 ---
-### 📘 추가 보완 사항
-1. 
+### 📘 추가 예정 사항
+1. Oauth2를 활용하여 Kakao, Google, Naver로 로그인이 가능하도록 구현
+2. Spring Security를 도입하여 별도로 나눠서 구현한 Jwt와 통합, CSRF(Cross-Site Request Forgery) 공격 방지, XSS(Cross-Site Scripting) 방어, 세션 관리, 브라우저 캐싱 방지 등 보안 기능을 강화.
+3. QueryDSL을 도입하여 동적쿼리 생성, 컴파일 시점의 문법 오류 검출 등 API추가.
 
