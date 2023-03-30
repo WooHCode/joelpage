@@ -32,6 +32,12 @@
 ### 🛠️ 개발 도구:
 - Intellij, putty, aws console, vscode(프론트 개발), postman, pgAdmin, git
 
-#### 프론트 페이지 링크: https://github.com/WooHCode/joeladminPage
+## &#x1F517; 링크:
+
+#### 프론트 페이지 깃허브 링크: https://github.com/WooHCode/joeladminPage
 
 #### 배포된 홈페이지 링크 : http://joeladmin.store/login
+
+---
+
+
