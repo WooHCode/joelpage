@@ -63,7 +63,7 @@ public class EmpApiController {
         return attList.stream().map(a -> new AttendantInfoDto
                 (loginMember.getEmpName(), loginMember.getEmpPay(), loginMember.getEmpWorkCount(), a.getAttendTime())).collect(Collectors.toList());
     }
-    @GetMapping("/empDetail/api/v1/emp/{searchName}")
+    @GetMapping("/{searchName}")
     public EmpDto findOneEmpByName(@PathVariable(value = "searchName") String name) {
         Employee findEmp = employeeService.findByEmpName(name);
         EmpDto resultEmp = EmpDto.builder()
