@@ -36,7 +36,7 @@
 
 #### 프론트 페이지 깃허브 링크: https://github.com/WooHCode/joeladminPage
 
-#### 배포된 홈페이지 링크 : http://joeladmin.store/login
+#### 배포된 홈페이지 링크 : http://joeladmin.store/
 
 ---
 
