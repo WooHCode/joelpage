@@ -17,7 +17,7 @@
 
 <img src="https://img.shields.io/badge/postgresql-51ADCE?style=flat-square&logo=postgresql&logoColor=">
 
-- Postgresql, Amazno RDS
+- Postgresql, Amazon RDS
 
 <img src="https://img.shields.io/badge/AWS-F2E1B9?style=flat-square&logo=AWS&logoColor=">
 
