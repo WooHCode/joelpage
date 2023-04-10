@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = {"http://joeladmin.store", "http://ec2-52-79-168-230.ap-northeast-2.compute.amazonaws.com:8080"})
 @RequiredArgsConstructor
 public class EmpApiController {
     private final EmployeeService employeeService;
@@ -78,7 +79,7 @@ public class EmpApiController {
                 .age(findEmp.getEmpAge())
                 .empDesc(findEmp.getEmpDescription())
                 .build();
-        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(resultEmp);
+        return ResponseEntity.ok().body(resultEmp);
     }
 
     @GetMapping("/api/v1/emp/search")
