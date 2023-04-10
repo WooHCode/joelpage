@@ -53,11 +53,11 @@
 2. N+1
 - 문제: Employee 엔티티와 Attendance 엔티티는 1 : 다 관계로 매핑되어있음. 그리하여 Employee를 전체조회하면 각 Employee에 관련된 Attendance가 추가로 여러번 쿼리가 발생되어 성능이 저하됨.
 - 해결 : Default값인 @ManyToOne(fetch = FetchType.EAGER)에서 @ManyToOne(fetch = FetchType.LAZY)로 변경하여 실제 데이터가 필요한 시점에서 데이터를 가져올 수 있도록 변경 
-- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Attendance.java ==> 24 Line
+- 관련링크 : [https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Attendance.java ==> 24 Line](https://github.com/WooHCode/joelpage/blob/ca2e130fdb36909b19ec0f87ca84cb547f898146/src/main/java/joel/joelpage/entity/Attendance.java#L24)
 
 3. 재귀호출
 - 문제 : LoginMember 엔티티와 연관된 필드가 JSON으로 serialize(직렬화) 될 때 무한 재귀 호출이 발생함. 그로인해 서버가 다운됨. LoginMember 엔티티가 Employee엔티티 내부에 있고, LoginMember 엔티티에 Employee가 내부에 있기때문에 LoginMember를 JSON으로 직렬화 하려고 할때, 내부에 있는 Employee필드를 다시 직렬화 하게되고 Employee필드를 직렬화 하게 될때, LoginMember를 다시 직렬화하는 과정을 반복하면서 발생함.
-- 해결 : @JsonIgnore 어도테이션을 사용하여 LoginMember필드가 JSON으로 다시 직렬화 되지 않도록 설정
+- 해결 : @JsonIgnore 어노테이션을 사용하여 LoginMember필드가 JSON으로 다시 직렬화 되지 않도록 설정
 - 관련링크 : [https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Employee.java  ==> 55 ~ 58 Line](https://github.com/WooHCode/joelpage/blob/b28b5d15fd0a5c42e52d08a3f0eb0761c1dea090/src/main/java/joel/joelpage/entity/Employee.java#L55-L58) 
 4. CORS 문제
 - 문제 : 로컬 개발 환경에서는 프론트 서버와 통신에 문제가 없었지만, 서버를 EC2에 배포하다 보니 서버로 api요청 시 CORS문제가 발생함.
@@ -66,8 +66,8 @@
 5. LocalDateTime 사용 문제
 - 문제 : LocalDateTime으로 시간 비교 시 duration을 사용해서 비교를 하게되면 다음날이 되어 시간이 00시 이후가 되면 차이 값이 -가된다.
 - 해결: difference.getSeconds()/3600 의 값이 - 로 나온다면 +24를 더해서 하루가 지났다는것을 인지시켜준다.
-- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/service/EmployeeService.java 
-- ==>  117 ~ 129 Line
+- 관련링크 : [https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/service/EmployeeService.java ==>  117 ~ 129]  Line(https://github.com/WooHCode/joelpage/blob/ca2e130fdb36909b19ec0f87ca84cb547f898146/src/main/java/joel/joelpage/service/EmployeeService.java#L117-L130) 
+
 
 ---
 
