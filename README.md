@@ -23,6 +23,8 @@
 
 - AWS EC2, Apache Tomcat
 
+- CI/CD: Amazon s3, github Action, AWS CodeDeploy 
+
 ##### 추가 라이브러리
 
 - P6spy(로그 콘솔창 출력 라이브러리)
@@ -72,6 +74,11 @@
 ### 🗃️ 데이터베이스 ERD
 
 ![image](https://user-images.githubusercontent.com/112393201/228768854-bbac2cb2-41e4-4246-bdc6-9d9f29486c33.png)
+
+### 🚀 CI/CD Pipeline
+![cicd](https://user-images.githubusercontent.com/112393201/230896807-b86d7865-f447-4d3b-8277-d796a6456ec7.png)
+
+
 
 
 ---
