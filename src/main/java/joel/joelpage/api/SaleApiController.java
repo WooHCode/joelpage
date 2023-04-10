@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class SaleApiController {
     private final SaleService saleService;
