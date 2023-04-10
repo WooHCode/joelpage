@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = {"http://joeladmin.store", "http://ec2-52-79-168-230.ap-northeast-2.compute.amazonaws.com:8080"})
 @RequiredArgsConstructor
 public class SaleApiController {
     private final SaleService saleService;
