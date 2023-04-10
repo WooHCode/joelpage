@@ -75,10 +75,10 @@
 
 ![image](https://user-images.githubusercontent.com/112393201/228768854-bbac2cb2-41e4-4246-bdc6-9d9f29486c33.png)
 
+---
+
 ### 🚀 CI/CD Pipeline
 ![cicd](https://user-images.githubusercontent.com/112393201/230896807-b86d7865-f447-4d3b-8277-d796a6456ec7.png)
-
-
 
 
 ---
