@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = {"http://joeladmin.store", "http://ec2-52-79-168-230.ap-northeast-2.compute.amazonaws.com:8080"})
 @RequiredArgsConstructor
 public class LoginApiController {
 
