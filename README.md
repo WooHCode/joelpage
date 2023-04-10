@@ -58,7 +58,7 @@
 3. 재귀호출
 - 문제 : LoginMember 엔티티와 연관된 필드가 JSON으로 serialize(직렬화) 될 때 무한 재귀 호출이 발생함. 그로인해 서버가 다운됨. LoginMember 엔티티가 Employee엔티티 내부에 있고, LoginMember 엔티티에 Employee가 내부에 있기때문에 LoginMember를 JSON으로 직렬화 하려고 할때, 내부에 있는 Employee필드를 다시 직렬화 하게되고 Employee필드를 직렬화 하게 될때, LoginMember를 다시 직렬화하는 과정을 반복하면서 발생함.
 - 해결 : @JsonIgnore 어도테이션을 사용하여 LoginMember필드가 JSON으로 다시 직렬화 되지 않도록 설정
-- 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Employee.java  ==> 55 ~ 58 Line 
+- 관련링크 : [https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Employee.java  ==> 55 ~ 58 Line](https://github.com/WooHCode/joelpage/blob/b28b5d15fd0a5c42e52d08a3f0eb0761c1dea090/src/main/java/joel/joelpage/entity/Employee.java#L55-L58) 
 4. CORS 문제
 - 문제 : 로컬 개발 환경에서는 프론트 서버와 통신에 문제가 없었지만, 서버를 EC2에 배포하다 보니 서버로 api요청 시 CORS문제가 발생함.
 - 해결 : webConfig클래스를 @Configuration으로 등록하고 요청에 대한 Origin을 허용하여 CORS정책에 의한 Block을 해결
