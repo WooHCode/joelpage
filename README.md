@@ -61,8 +61,8 @@
 - 관련링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/entity/Employee.java  ==> 55 ~ 58 Line 
 4. CORS 문제
 - 문제 : 로컬 개발 환경에서는 프론트 서버와 통신에 문제가 없었지만, 서버를 EC2에 배포하다 보니 서버로 api요청 시 CORS문제가 발생함.
-- 해결 : API controller에 @CrossOrigin 을 지정해줘서 응답 헤더에 Access-Control-Allow-Origin의 값을 응답가능한 도메인을 추가해줘서 다른 도메인으로 부터 리소스 요청이 왔을 때 교차 오리진 자원 공유를 가능하게 함.
-- 관련 링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/api/EmpApiController.java  ==> 23 Line
+- 해결 : webConfig클래스를 @Configuration으로 등록하고 요청에 대한 Origin을 허용하여 CORS정책에 의한 Block을 해결
+- 관련 링크 : https://github.com/WooHCode/joelpage/blob/master/src/main/java/joel/joelpage/config/WebConfig.java
 5. LocalDateTime 사용 문제
 - 문제 : LocalDateTime으로 시간 비교 시 duration을 사용해서 비교를 하게되면 다음날이 되어 시간이 00시 이후가 되면 차이 값이 -가된다.
 - 해결: difference.getSeconds()/3600 의 값이 - 로 나온다면 +24를 더해서 하루가 지났다는것을 인지시켜준다.
